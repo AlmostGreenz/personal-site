@@ -54,10 +54,10 @@ i.fa { margin-right: .35em; }
   --green: #69CA31;
   --violet: #7c5cff;
   --orange: #e8930c;
-  --brand: #3d8b40;
+  --brand: #69CA31;
   --ink: #171a1e;
   --muted: #5d6672;
-  --paper: #fbfaf8;
+  --paper: #f4faf4; /* matches the old site's w3-theme-l5 body background */
   --card: #ffffff;
   --line: #ece8e2;
   --display: "Bricolage Grotesque", "Open Sans", system-ui, sans-serif;
@@ -122,7 +122,7 @@ body {
   text-decoration: none; padding: 8px 14px; border-radius: 999px; transition: background .15s;
 }
 .nav-links a:hover { background: #e6f2e7; }
-.nav-links a.active { background: #3d8b40; color: #fff; }
+.nav-links a.active { background: var(--green); color: var(--ink); }
 .nav-toggle {
   display: none; margin-left: auto; background: none; border: 1px solid var(--line);
   border-radius: 10px; padding: 8px 12px; font-size: 18px; color: var(--ink); cursor: pointer;
@@ -169,6 +169,9 @@ h1.name .r { color: var(--red); } h1.name .b { color: var(--blue); } h1.name .g 
 /* ---------- Layout ---------- */
 .page { max-width: 1120px; margin: 0 auto; padding: 8px 24px 80px; display: grid; grid-template-columns: 1fr 300px; gap: 36px; align-items: start; }
 @media (max-width: 860px) { .page { grid-template-columns: 1fr; } }
+/* About pages: full-width content, sidebar cards sit side-by-side below. */
+.page-about { grid-template-columns: 1fr; }
+.page-about aside { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: start; }
 
 /* ---------- Quote ---------- */
 .quote-block { position: relative; margin: 8px 0 36px; padding: 6px 0 6px 28px; }
@@ -279,6 +282,7 @@ footer .tribar { height: 4px; border-radius: 2px; max-width: 200px; margin: 0 au
 .about-card ul { padding-left: 22px; margin: 8px 0 16px; }
 .about-card li { margin-bottom: 4px; }
 .about-card a { color: var(--blue); }
+.about-card a.btn-choice { color: #fff; }
 .choice-btns { display: flex; gap: 12px; flex-wrap: wrap; margin: 18px 0 6px; }
 .btn-choice {
   font-family: var(--display); font-weight: 700; font-size: 15px; color: #fff; text-decoration: none;

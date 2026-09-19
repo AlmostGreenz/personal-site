@@ -44,7 +44,7 @@
 </header>
 
 <!-- Page -->
-<div class="page">
+<div class="page{% block pageclass %}{% endblock %}">
   <main>
     {% block content %}{% endblock %}
   </main>
