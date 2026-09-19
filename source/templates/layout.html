@@ -31,9 +31,9 @@
     <a class="logo" href="/"><span class="r">R.</span><span class="b">B.</span><span class="g">G.</span></a>
     <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fa fa-bars"></i></button>
     <nav class="nav-links" id="navLinks">
-      <a href="/" class="{% if request.path == '/' or request.path == '/old.html' %}active{% endif %}">Home</a>
+      <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
       <a href="/about/" class="{% if request.path.startswith('/about') %}active{% endif %}">About</a>
-      {% set news_href = '#posts' if request.path in ['/', '/old.html'] else '/#posts' %}
+      {% set news_href = '#posts' if request.path == '/' else '/#posts' %}
       <div class="nav-news">
         <a href="{{ news_href }}" class="icon-link posts-link" id="newsToggle" title="All Posts" aria-haspopup="true" aria-expanded="false"><i class="fa fa-newspaper-o"></i><span class="nav-badge">{{ posts|length }}</span></a>
         <div class="news-dropdown" id="newsDropdown" role="menu" aria-label="All posts">

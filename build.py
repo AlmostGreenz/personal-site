@@ -362,14 +362,6 @@ def main():
     html = env.get_template("index.html").render(ctx)
     write("index.html", html)
 
-    # -- homepage, oldest first -------------------------------------------
-    # Same index template, posts reversed; the client-side sort toggle starts
-    # in the "Oldest first" state via sorted_new=False.
-    ctx = base_ctx("/old.html")
-    ctx.update(posts=list(reversed(posts)), sorted_new=False)
-    html = env.get_template("index.html").render(ctx)
-    write("old.html", html)
-
     # -- about pages (the ?choice= variants become static subpages) --------
     for choice, rel in [
         ("start", "about/index.html"),

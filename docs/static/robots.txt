@@ -1,4 +1,2 @@
 User-agent: *
-
-Disallow: /login/
-Noindex: /login/
+Allow: /

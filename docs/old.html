@@ -1,413 +1,0 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>R.B.G.
-        - Home
-</title>
-<meta charset="UTF-8">
-<script>
-/* Set the theme before first paint to avoid a flash of the wrong theme. */
-(function(){try{var t=localStorage.getItem('rbg-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches){t='dark';}document.documentElement.setAttribute('data-theme',t||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="R.B.G. — the personal site of Ryan B. Green, SDE at AWS. Past projects, games, and information.">
-<link rel="preload" href="./static/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="./static/fonts/fontawesome-webfont.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="./static/fonts/opensans-regular.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="./static/styling/css/bold.css">
-<link rel="apple-touch-icon" sizes="180x180" href="./static/apple-touch-icon.png?v=3">
-<link rel="icon" type="image/png" sizes="32x32" href="./static/favicon-32x32.png?v=3">
-<link rel="icon" type="image/png" sizes="16x16" href="./static/favicon-16x16.png?v=3">
-<link rel="manifest" href="./static/site.webmanifest?v=3">
-<link rel="mask-icon" href="./static/safari-pinned-tab.svg?v=3" color="#6eb929">
-<link rel="shortcut icon" href="./static/favicon.ico?v=3">
-<meta name="msapplication-TileColor" content="#00a300">
-<meta name="msapplication-config" content="./static/browserconfig.xml?v=3">
-<meta name="theme-color" content="#6eb929">
-</head>
-<body>
-
-<!-- Navbar -->
-<header class="nav">
-  <div class="nav-inner">
-    <a class="logo" href="./"><span class="r">R.</span><span class="b">B.</span><span class="g">G.</span></a>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fa fa-bars"></i></button>
-    <nav class="nav-links" id="navLinks">
-      <a href="./" class="active">Home</a>
-      <a href="./about/" class="">About</a>
-      
-      <div class="nav-news">
-        <a href="#posts" class="icon-link posts-link" id="newsToggle" title="All Posts" aria-haspopup="true" aria-expanded="false"><i class="fa fa-newspaper-o"></i><span class="nav-badge">19</span></a>
-        <div class="news-dropdown" id="newsDropdown" role="menu" aria-label="All posts">
-          <div class="news-dropdown-head">All Posts <span>19</span></div>
-          <ul>
-            
-            <li><a href="./post/arduino-alarm-clock/">Arduino Alarm Clock</a></li>
-            
-            <li><a href="./post/r2d2-keychain-3d-model/">R2-D2 Keychain 3-D Model</a></li>
-            
-            <li><a href="./post/greenbot-the-interactive-robot/">GreenBot the Interactive Robot</a></li>
-            
-            <li><a href="./post/the-fretboard-connection-a-guitar/">The Fretboard Connection ‒ A Guitar Hero-esque Rhythm Game</a></li>
-            
-            <li><a href="./post/galaga-bouncing-animation/">Galaga Bouncing Animation</a></li>
-            
-            <li><a href="./post/star-wars-defenders-of-hoth-arcade-game/">Star Wars: Defenders of Hoth ‒ Arcade Game</a></li>
-            
-            <li><a href="./post/knight-rider-kitt-scanner-lights/">Knight Rider: KITT Scanner Lights</a></li>
-            
-            <li><a href="./post/arduino-3d-scanner/">Arduino 3-D Scanner</a></li>
-            
-            <li><a href="./post/guardians-of-the-galaxy-asteroids-concept-game/">Guardians of the Galaxy Asteroids ‒ Concept Game</a></li>
-            
-            <li><a href="./post/dig-dug-recreation/">Dig Dug Recreation</a></li>
-            
-            <li><a href="./post/virtual-meeting-maestro-uofthacks-viii/">Virtual Meeting Maestro - UofTHacks VIII</a></li>
-            
-            <li><a href="./post/short-story-published-by-ghost-orchid-press/">Short Story Published by Ghost Orchid Press</a></li>
-            
-            <li><a href="./post/visualsaplenty-a-javascript-graphing-library/">VisualsAplenty - A JavaScript Graphing Library</a></li>
-            
-            <li><a href="./post/too-fit-to-quit-calgaryhacks-2022/">Too Fit to Quit - CalgaryHacks 2022</a></li>
-            
-            <li><a href="./post/samaritan-a-highfidelity-prototype/">Samaritan - A High-Fidelity Prototype</a></li>
-            
-            <li><a href="./post/flowy-for-unicef/">Flowy for UNICEF</a></li>
-            
-            <li><a href="./post/poker-hand-captcha/">Poker Hand CAPTCHA</a></li>
-            
-            <li><a href="./post/shifting-perspective-a-unity-puzzleplatformer/">Shifting Perspective - A Unity Puzzle-Platformer</a></li>
-            
-            <li><a href="./post/url-jumper-chrome-extension/">URL Jumper - Chrome Extension</a></li>
-            
-          </ul>
-          <a href="#posts" class="news-dropdown-foot posts-link">Browse by tag <i class="fa fa-arrow-down"></i></a>
-        </div>
-      </div>
-      <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="fa fa-moon-o"></i><i class="fa fa-sun-o"></i></button>
-    </nav>
-  </div>
-  <div class="tribar"></div>
-</header>
-
-<!-- Page -->
-<div class="page">
-  <main>
-    
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-text">
-    <div class="eyebrow"><span class="dot-r">&#9679;</span> <span class="dot-b">&#9679;</span> <span class="dot-g">&#9679;</span>&nbsp; Hey, I'm</div>
-    <h1 class="name"><span class="r">Ryan</span> <span class="b">B.</span> <span class="g">Green</span></h1>
-    <p class="role"><strong>Software Dev Engineer</strong> &middot; <i class="fa fa-home fa-fw"></i> Toronto, ON / Vancouver, BC</p>
-    <p class="role"><i class="fa fa-birthday-cake fa-fw"></i> November 10th, 2001</p>
-    <div class="top-tags">
-      <span class="top-tags-label">Top tags</span>
-      <span class="tag r" data-f="Software">Software <small>14</small></span>
-      <span class="tag b" data-f="Python">Python <small>8</small></span>
-      <span class="tag g" data-f="Games">Games <small>6</small></span>
-    </div>
-  </div>
-  <div class="avatar-ring"><img src="./static/images/avatar.png" alt="Ryan B. Green" width="128" height="128" fetchpriority="high"></div>
-</section>
-
-<!-- Quote -->
-<div class="quote-block">
-  <div class="quote-label"><i class="fa fa-film"></i> Film of the hour</div>
-  <p class="quote-text" id="film-quote">&#8220;The only winning move is not to play.&#8221;</p>
-  <div class="quote-cite" id="film-cite">&#8212; <em>WarGames</em>, 1983 &middot; rotates every hour</div>
-</div>
-
-<!-- Filter pills + sort -->
-<div class="filter-row" id="posts">
-  <div class="pills" id="pills">
-    <button class="pill active-r" data-f="all">All <small>19</small></button>
-    <button class="pill" data-f="Arduino">Arduino <small>3</small></button>
-    <button class="pill" data-f="Python">Python <small>8</small></button>
-    <button class="pill" data-f="Software">Software <small>14</small></button>
-    <button class="pill" data-f="Games">Games <small>6</small></button>
-    <button class="pill" data-f="Misc.">Misc. <small>5</small></button>
-  </div>
-  <button class="sort-btn" id="sortBtn" data-newest="0" title="Toggle newest/oldest"><i class="fa fa-sort-amount-asc"></i><span>Oldest first</span></button>
-</div>
-
-<!-- Posts -->
-
-
-
-<article class="post r" data-tags="Arduino ">
-  <div class="post-date">Aug 12, 2020</div>
-  <h2><a href="./post/arduino-alarm-clock/">Arduino Alarm Clock</a></h2>
-  <div class="tagrow"><span class="tag v">Arduino</span></div>
-  
-  
-  
-  <div class="gallery">
-    <picture><source srcset="./static/images/alarmclockflowchart.webp" type="image/webp"><img class="gallery-lead" src="./static/images/alarmclockflowchart.png" alt="Post image" width="1830" height="408" loading="lazy" decoding="async"></picture>
-    
-  </div>
-  
-  <p class="excerpt">Back when I was 14 in 2016, I completed my first coding project, which was an alarm clock. Although it does not amount to much when compared to my ability now, I am proud of what I was able to accomplish with so little experience.<br><br>The clock was made with an Arduino Uno, along with a compatible LCD, potentiometer, and buzzer/piezo.<br><br>A time can be set in the clock's code specifying when the alarm will go off, which it will continue to do for 15 minutes (a long time, I know, but my track record for waking up on time is not the best).<br><br>While the original build was housed in a wooden case, it&hellip;</p>
-  <a class="readmore" href="./post/arduino-alarm-clock/">Read the post &rarr;</a>
-</article>
-
-<article class="post b" data-tags="Misc. ">
-  <div class="post-date">Aug 12, 2020</div>
-  <h2><a href="./post/r2d2-keychain-3d-model/">R2-D2 Keychain 3-D Model</a></h2>
-  <div class="tagrow"><span class="tag o">Misc.</span></div>
-  
-  
-  <p class="excerpt">Around the time I started learning how to program, I meddled with 3-D modelling. Although I did not continue pursuing this skill, I did make one model that I was quite proud of: an R2-D2 keychain.<br><br>Even though I'm sure it has been done better by others, feel free to mess around with the model if you are so inclined. However, if you are tempted to print it, I'm not sure if it will be structurally sound, so please take that into account.<br><br>&hellip;</p>
-  <a class="readmore" href="./post/r2d2-keychain-3d-model/">Read the post &rarr;</a>
-</article>
-
-<article class="post g" data-tags="Python Software Games ">
-  <div class="post-date">Aug 12, 2020</div>
-  <h2><a href="./post/greenbot-the-interactive-robot/">GreenBot the Interactive Robot</a></h2>
-  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag g">Games</span></div>
-  
-  <a class="video-link" data-vimeo-id="448612467" href="https://vimeo.com/448612467" target="_blank" rel="noopener"><picture><source srcset="./static/images/video-thumbs/448612467.webp" type="image/webp"><img src="./static/images/video-thumbs/448612467.jpg" alt="GreenBot the Interactive Robot demo video" width="1280" height="720" loading="lazy" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
-  
-  
-  <p class="excerpt">My first major creation after I started learning Python was an interactive robot I named GreenBot.<br><br>Using <a target="_blank" href="https://py.processing.org/" rel="noreferrer noopener">Processing's Python mode</a>, I was able to make him move around the screen at speeds controlled by the user, have him warp to the other side of the play area (à la Pac-Man), and have customization.<br><br>As well, I experimented with adding sound, resulting in the speed changes playing a higher/lower pitch sound when pressed based on the speed as well as a sound for when the style is changed.<br><br>This project&hellip;</p>
-  <a class="readmore" href="./post/greenbot-the-interactive-robot/">Read the post &rarr;</a>
-</article>
-
-<article class="post v" data-tags="Python Software Games ">
-  <div class="post-date">Aug 13, 2020</div>
-  <h2><a href="./post/the-fretboard-connection-a-guitar/">The Fretboard Connection ‒ A Guitar Hero-esque Rhythm Game</a></h2>
-  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag g">Games</span></div>
-  
-  <a class="video-link" data-vimeo-id="448623042" href="https://vimeo.com/448623042" target="_blank" rel="noopener"><picture><source srcset="./static/images/video-thumbs/448623042.webp" type="image/webp"><img src="./static/images/video-thumbs/448623042.jpg" alt="The Fretboard Connection ‒ A Guitar Hero-esque Rhythm Game demo video" width="1280" height="720" loading="lazy" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
-  
-  
-  
-  <div class="gallery">
-    <picture><source srcset="./static/images/fretboardmenu.webp" type="image/webp"><img class="gallery-lead" src="./static/images/fretboardmenu.png" alt="Post image" width="800" height="600" loading="lazy" decoding="async"></picture>
-    
-    <div class="gallery-thumbs">
-      <img src="./static/images/thumbs/fretboardmenu.webp" data-full="./static/images/fretboardmenu.png" data-full-webp="./static/images/fretboardmenu.webp" alt="Thumbnail 1" width="152" height="114" loading="lazy" decoding="async" class="active"><img src="./static/images/thumbs/fretboardgameplay.webp" data-full="./static/images/fretboardgameplay.png" data-full-webp="./static/images/fretboardgameplay.webp" alt="Thumbnail 2" width="152" height="114" loading="lazy" decoding="async" class="">
-    </div>
-    
-  </div>
-  
-  <p class="excerpt">In May/June 2017, after experimenting with Processing.py through <a href="./post/greenbot-the-interactive-robot/">GreenBot</a>, I finally made my first proper game. What I dubbed 'The Fretboard Connection' is a rhythm game inspired by the likes of Guitar Hero and Rock Band. <br><br>The game is not too complex at its heart. The descending notes are activated by well-timed corresponding key presses that award points. The whammy bar (the shift key), as in Guitar Hero, can be pressed along with the correct key to charge the whammy meter. Once the meter is full, it can be activated to award bonus points for&hellip;</p>
-  <a class="readmore" href="./post/the-fretboard-connection-a-guitar/">Read the post &rarr;</a>
-</article>
-
-<article class="post o" data-tags="Python Software ">
-  <div class="post-date">Aug 17, 2020</div>
-  <h2><a href="./post/galaga-bouncing-animation/">Galaga Bouncing Animation</a></h2>
-  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span></div>
-  
-  <a class="video-link" data-vimeo-id="448634923" href="https://vimeo.com/448634923" target="_blank" rel="noopener"><picture><source srcset="./static/images/video-thumbs/448634923.webp" type="image/webp"><img src="./static/images/video-thumbs/448634923.jpg" alt="Galaga Bouncing Animation demo video" width="1280" height="720" loading="lazy" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
-  
-  
-  <p class="excerpt">After backing <a target="_blank" href="https://www.kickstarter.com/projects/coverville/jazzness-a-nintendo-classic-jazz-tribute/" rel="noreferrer noopener">JazzNESs on Kickstarter</a> in 2017, I was inspired to make my third official Processing.py project: a bouncing animation <a target="_blank" href="https://www.youtube.com/watch?v=5mGuCdlCcNM" rel="noreferrer noopener">(à la a DVD player's sleep screen)</a> themed after my favourite game on the album: Galaga. <br><br>I created a simple edge-detection program that caused the player's ship from Galaga to bounce off the left and right sides of the screen, then&hellip;</p>
-  <a class="readmore" href="./post/galaga-bouncing-animation/">Read the post &rarr;</a>
-</article>
-
-<article class="post r" data-tags="Python Software Games ">
-  <div class="post-date">Aug 17, 2020</div>
-  <h2><a href="./post/star-wars-defenders-of-hoth-arcade-game/">Star Wars: Defenders of Hoth ‒ Arcade Game</a></h2>
-  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag g">Games</span></div>
-  
-  <a class="video-link" data-vimeo-id="448702298" href="https://vimeo.com/448702298" target="_blank" rel="noopener"><picture><source srcset="./static/images/video-thumbs/448702298.webp" type="image/webp"><img src="./static/images/video-thumbs/448702298.jpg" alt="Star Wars: Defenders of Hoth ‒ Arcade Game demo video" width="1280" height="720" loading="lazy" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
-  
-  
-  <p class="excerpt">After I had <i>finally</i> learned about functions in late 2017/early 2018, I decided to make an arcade game taking place in the Star Wars universe (because of Episode VIII's release at the time). <br><br>The game takes the form of a shooter. Taking place just prior to the events of The Empire Strikes Back, the Millennium Falcon must destroy the incoming TIE fighters as they attempt to penetrate the shield surrounding the Rebel base on Hoth. <br><br>Unlike my prior games, Defenders of Hoth stores high scores in a file, allowing them to be conserved between play sessions instead of resetting each time. I made&hellip;</p>
-  <a class="readmore" href="./post/star-wars-defenders-of-hoth-arcade-game/">Read the post &rarr;</a>
-</article>
-
-<article class="post b" data-tags="Arduino ">
-  <div class="post-date">Aug 17, 2020</div>
-  <h2><a href="./post/knight-rider-kitt-scanner-lights/">Knight Rider: KITT Scanner Lights</a></h2>
-  <div class="tagrow"><span class="tag v">Arduino</span></div>
-  
-  
-  
-  <div class="gallery">
-    <picture><source srcset="./static/images/kittSchem.webp" type="image/webp"><img class="gallery-lead" src="./static/images/kittSchem.jpg" alt="Post image" width="720" height="540" loading="lazy" decoding="async"></picture>
-    
-    <div class="gallery-thumbs">
-      <img src="./static/images/thumbs/kittSchem.webp" data-full="./static/images/kittSchem.jpg" data-full-webp="./static/images/kittSchem.webp" alt="Thumbnail 1" width="152" height="114" loading="lazy" decoding="async" class="active"><img src="./static/images/thumbs/kittIRL.webp" data-full="./static/images/kittIRL.jpg" data-full-webp="./static/images/kittIRL.webp" alt="Thumbnail 2" width="152" height="114" loading="lazy" decoding="async" class="">
-    </div>
-    
-  </div>
-  
-  <p class="excerpt">In 2018, I returned back to working with Arduino boards. For my second proper project, I made a recreation of KITT's scanner lights from the '80s show Knight Rider.<br><br>In the series, the scanner is depicted by red light that moves from side to side on the grill of main character Michael Knight's car (named KITT). To recreate this, I used an Arduino Uno, five red LEDS, a 10 kΩ resistor, 10 kΩ potentiometer, and five 330 Ω resistors. <br><br>I designed the lights to be toggled on or off by a push of a power button. As well, the speed of the 'movement' of the light could be controlled by a dial (the&hellip;</p>
-  <a class="readmore" href="./post/knight-rider-kitt-scanner-lights/">Read the post &rarr;</a>
-</article>
-
-<article class="post g" data-tags="Arduino ">
-  <div class="post-date">Aug 18, 2020</div>
-  <h2><a href="./post/arduino-3d-scanner/">Arduino 3-D Scanner</a></h2>
-  <div class="tagrow"><span class="tag v">Arduino</span></div>
-  
-  
-  
-  <div class="gallery">
-    <picture><source srcset="./static/images/3dscanner1.webp" type="image/webp"><img class="gallery-lead" src="./static/images/3dscanner1.jpg" alt="Post image" width="640" height="640" loading="lazy" decoding="async"></picture>
-    
-    <div class="gallery-thumbs">
-      <img src="./static/images/thumbs/3dscanner1.webp" data-full="./static/images/3dscanner1.jpg" data-full-webp="./static/images/3dscanner1.webp" alt="Thumbnail 1" width="152" height="152" loading="lazy" decoding="async" class="active"><img src="./static/images/thumbs/3dscanner2.webp" data-full="./static/images/3dscanner2.jpg" data-full-webp="./static/images/3dscanner2.webp" alt="Thumbnail 2" width="152" height="152" loading="lazy" decoding="async" class=""><img src="./static/images/thumbs/3dscanner3.webp" data-full="./static/images/3dscanner3.jpg" data-full-webp="./static/images/3dscanner3.webp" alt="Thumbnail 3" width="152" height="152" loading="lazy" decoding="async" class="">
-    </div>
-    
-  </div>
-  
-  <p class="excerpt">In 2018, after getting back into working with the Arduino Uno via my <a href="./post/knight-rider-kitt-scanner-lights/">KITT project</a>,  I decided to go <b>bigger</b>. At the time, I was into playing <a target="_blank" href="https://store.steampowered.com/app/438100/VRChat/" rel="noreferrer noopener">VRChat</a>, a game where avatars can be imported in via 3-D models. This sparked my interest in 3-D modelling again, which, combined with my recent KITT project, prompted me to create a 3-D scanner.<br><br>I used the supplies available to me at my high school to build it, mostly using parts from Vex Robotics kits&hellip;</p>
-  <a class="readmore" href="./post/arduino-3d-scanner/">Read the post &rarr;</a>
-</article>
-
-<article class="post v" data-tags="Python Software Games ">
-  <div class="post-date">Aug 18, 2020</div>
-  <h2><a href="./post/guardians-of-the-galaxy-asteroids-concept-game/">Guardians of the Galaxy Asteroids ‒ Concept Game</a></h2>
-  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag g">Games</span></div>
-  
-  <a class="video-link" data-vimeo-id="449045523" href="https://vimeo.com/449045523" target="_blank" rel="noopener"><picture><source srcset="./static/images/video-thumbs/449045523.webp" type="image/webp"><img src="./static/images/video-thumbs/449045523.jpg" alt="Guardians of the Galaxy Asteroids ‒ Concept Game demo video" width="1280" height="720" loading="lazy" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
-  
-  
-  <p class="excerpt">In early 2019, I was introduced to Object Oriented Programming and returned to Processing.py to test out my new <i>powers</i>. I decided to recreate the classic 1979 arcade game Asteroids themed after <a target="_blank" href="https://youtu.be/5ROiWmnWJHw?t=98" rel="noreferrer noopener">the asteroid evasion scene in Guardians of the Galaxy Vol. 2</a>. <br><br>Unfortunately, I never completed the game. However, nearly all of the core features are already implemented: the asteroids split when hit, the player's ship experiences acceleration, points are assigned when asteroids are destroyed, and the player's lives&hellip;</p>
-  <a class="readmore" href="./post/guardians-of-the-galaxy-asteroids-concept-game/">Read the post &rarr;</a>
-</article>
-
-<article class="post o" data-tags="Python Software Games ">
-  <div class="post-date">Aug 19, 2020</div>
-  <h2><a href="./post/dig-dug-recreation/">Dig Dug Recreation</a></h2>
-  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag g">Games</span></div>
-  
-  <a class="video-link" data-vimeo-id="449332346" href="https://vimeo.com/449332346" target="_blank" rel="noopener"><picture><source srcset="./static/images/video-thumbs/449332346.webp" type="image/webp"><img src="./static/images/video-thumbs/449332346.jpg" alt="Dig Dug Recreation demo video" width="1280" height="720" loading="lazy" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
-  
-  
-  <p class="excerpt">In June 2019, I completed my favourite project to date: a recreation of the 1982 arcade game Dig Dug. Although I took some artistic liberties, I think the result turned out to be pretty faithful to the original game. Putting Object Oriented Programming to full use, I managed to create a game that is much more complex than my prior forays in a way that, when looking at the code, actually seems simpler. <br><br>The first level of my recreation is faithful to the original game. However, every subsequent level is randomly generated with four enemies spawning in a random 'hole' dug in the map. Like in the original,&hellip;</p>
-  <a class="readmore" href="./post/dig-dug-recreation/">Read the post &rarr;</a>
-</article>
-
-<article class="post r" data-tags="Software ">
-  <div class="post-date">Feb 22, 2021</div>
-  <h2><a href="./post/virtual-meeting-maestro-uofthacks-viii/">Virtual Meeting Maestro - UofTHacks VIII</a></h2>
-  <div class="tagrow"><span class="tag r">Software</span></div>
-  
-  <a class="video-link" data-vimeo-id="514865803" href="https://vimeo.com/514865803" target="_blank" rel="noopener"><picture><source srcset="./static/images/video-thumbs/514865803.webp" type="image/webp"><img src="./static/images/video-thumbs/514865803.jpg" alt="Virtual Meeting Maestro - UofTHacks VIII demo video" width="1280" height="720" loading="lazy" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
-  
-  
-  <p class="excerpt">I recently took part in UofTHacks VIII which is the University of Toronto's annual hackathon. Over the span of a month leading up to the hackathon, I was trying to figure out what to make. After being faced with the same annoyance time and time again, an idea came to me: I should make a program that allows for ease of tracking virtual meetings. Never again would I have to trudge through 15 different submenus in order to find the link to my Zoom lecture.<br><br>I decided to use Processing as I have in the past but in the Java mode as opposed to Python. This did present some challenges as I was not used to the&hellip;</p>
-  <a class="readmore" href="./post/virtual-meeting-maestro-uofthacks-viii/">Read the post &rarr;</a>
-</article>
-
-<article class="post b" data-tags="Misc. ">
-  <div class="post-date">Apr 28, 2021</div>
-  <h2><a href="./post/short-story-published-by-ghost-orchid-press/">Short Story Published by Ghost Orchid Press</a></h2>
-  <div class="tagrow"><span class="tag o">Misc.</span></div>
-  
-  
-  <p class="excerpt">I have some exciting news to share: I had a short story published in an anthology and it's being released today! It was a typical weekday, and I had just finished an online course tutorial when I saw the call for submissions for a drabble anthology called <i>Beneath</i>. <br><br>I had some spare time, so I thought I might as well give it a try, and here I am now talking about it! My thanks again go to Antonia at Ghost Orchid Press and all the other writers that submitted their work. I'm excited to read all the other stories!<br><br>Check out the GoodReads page via the button below if you're interested. My&hellip;</p>
-  <a class="readmore" href="./post/short-story-published-by-ghost-orchid-press/">Read the post &rarr;</a>
-</article>
-
-<article class="post g" data-tags="Software Misc. ">
-  <div class="post-date">Dec 19, 2021</div>
-  <h2><a href="./post/visualsaplenty-a-javascript-graphing-library/">VisualsAplenty - A JavaScript Graphing Library</a></h2>
-  <div class="tagrow"><span class="tag r">Software</span><span class="tag o">Misc.</span></div>
-  
-  
-  <p class="excerpt">I’m happy to announce the release of my JavaScript library <b>VisualsAplenty.js</b>! <br><br>VisualsAplenty is an open-source JavaScript library intended to help web developers add fully animated data plots to their sites without hassle. With the simple inclusion of the VisualsAplenty JavaScript and CSS files into a webpage, you gain access to a range of data plotting tools. The three types of plots available in this first release are Bar Charts, Scatter Plots, and Pie Graphs, each coming with a range of customization features. <br><br>Please visit the VisualsAplenty sub-site to learn more and to see usage&hellip;</p>
-  <a class="readmore" href="./post/visualsaplenty-a-javascript-graphing-library/">Read the post &rarr;</a>
-</article>
-
-<article class="post v" data-tags="Software ">
-  <div class="post-date">Feb 26, 2022</div>
-  <h2><a href="./post/too-fit-to-quit-calgaryhacks-2022/">Too Fit to Quit - CalgaryHacks 2022</a></h2>
-  <div class="tagrow"><span class="tag r">Software</span></div>
-  
-  
-  <p class="excerpt">Last week I participated in CalgaryHacks 2022, the annual hackathon hosted by the University of Calgary. I was invited to participate by a friend who was putting together a team for the event, which I was happy to accept and proceeded to invite a friend of my own to round out our group of four.<br><br>The hackathon organizers provided a few topics of which each submission must address at least one. We selected the topic: <b>Develop a tool to help people live a healthy lifestyle</b>. Our application, Too Fit to Quit, aims to motivate its users to exercise by providing the functionality to customize their own&hellip;</p>
-  <a class="readmore" href="./post/too-fit-to-quit-calgaryhacks-2022/">Read the post &rarr;</a>
-</article>
-
-<article class="post o" data-tags="Software Misc. ">
-  <div class="post-date">May 1, 2022</div>
-  <h2><a href="./post/samaritan-a-highfidelity-prototype/">Samaritan - A High-Fidelity Prototype</a></h2>
-  <div class="tagrow"><span class="tag r">Software</span><span class="tag o">Misc.</span></div>
-  
-  
-  <p class="excerpt">As part of the course CSC318 (The Design of Interactive Computational Media), I was part of a group of five developers (the others being Makan Dehizadeh, Samantha Fassnacht, Vedang Ashwin Naik, & Hanna Zeng) for a smartphone and smart watch app we dubbed <i>Samaritan: Reward those that made your day</i>. <br><br><i>Samaritan</i> was motivated by the idea that the world is smaller than you think. Imagine you are on your way to a job interview when the contents of your bag spill out all over the sidewalk as you trip over a long-forgotten coffee cup. A helpful stranger comes along and helps you wrangle everything&hellip;</p>
-  <a class="readmore" href="./post/samaritan-a-highfidelity-prototype/">Read the post &rarr;</a>
-</article>
-
-<article class="post r" data-tags="Python Software ">
-  <div class="post-date">Dec 8, 2023</div>
-  <h2><a href="./post/flowy-for-unicef/">Flowy for UNICEF</a></h2>
-  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span></div>
-  
-  
-  <p class="excerpt">I recently had the opportunity to develop a web application for UNICEF in co-ordination with Evan Wheeler of the UNICEF Digital Centre of Excellence. I was chosen to work alongside six other University of Toronto students (as part of CSC301) to develop <i>Flowy</i> - a web application to assist UNICEF employees in sharing and finding message flows for their open-source platform <a target="_blank" href="https://app.rapidpro.io/" rel="noreferrer noopener">RapidPro</a>. <br><br>For context, a message flow is a configuration for RapidPro to operate automated SMS services. UNICEF uses these flows to co-ordinate&hellip;</p>
-  <a class="readmore" href="./post/flowy-for-unicef/">Read the post &rarr;</a>
-</article>
-
-<article class="post b" data-tags="Python Software Misc. ">
-  <div class="post-date">Mar 31, 2024</div>
-  <h2><a href="./post/poker-hand-captcha/">Poker Hand CAPTCHA</a></h2>
-  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag o">Misc.</span></div>
-  
-  <a class="video-link" data-vimeo-id="937970295" href="https://vimeo.com/937970295" target="_blank" rel="noopener"><picture><source srcset="./static/images/video-thumbs/937970295.webp" type="image/webp"><img src="./static/images/video-thumbs/937970295.jpg" alt="Poker Hand CAPTCHA demo video" width="1280" height="720" loading="lazy" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
-  
-  
-  <p class="excerpt">Since the summer of 2023, I have been involved in the <a target="_blank" href="https://uoftcprg.com/" rel="noreferrer noopener">University of Toronto Computer Poker Student Research Group</a> (U of T CPRG) led by Juho Kim under the advisement of Dr. Michael Stumm. I am happy to share the project I have recently completed as part of this group: a CAPTCHA challenge based around poker hands. <br><br>This project was implemented using Django, making use of Juho Kim’s <i>Pokerkit</i> Python library to generate and validate poker hands. A random hand type will be generated and requested from the user, who must drag&hellip;</p>
-  <a class="readmore" href="./post/poker-hand-captcha/">Read the post &rarr;</a>
-</article>
-
-<article class="post g" data-tags="Software Games ">
-  <div class="post-date">Apr 20, 2024</div>
-  <h2><a href="./post/shifting-perspective-a-unity-puzzleplatformer/">Shifting Perspective - A Unity Puzzle-Platformer</a></h2>
-  <div class="tagrow"><span class="tag r">Software</span><span class="tag g">Games</span></div>
-  
-  
-  <p class="excerpt">Yesterday I had the opportunity to be an exhibitor at this year’s LevelUp Showcase. I was there showing off the game <i>Shifting Perspective</i>, which I have been working on as a developer since January in collaboration with students from OCAD University and the University of Toronto Music Department, as well as fellow Computer Science students. This was part of the course CSC404 (Introduction to Video Game Design), instructed by Professor Steve Engels. <br><br><i>Shifting Perspective</i> is a Puzzle-Platformer, Adventure game where the player and their faithful fairy companion <i>Ceru</i> must use their&hellip;</p>
-  <a class="readmore" href="./post/shifting-perspective-a-unity-puzzleplatformer/">Read the post &rarr;</a>
-</article>
-
-<article class="post v" data-tags="Software">
-  <div class="post-date">Nov 16, 2024</div>
-  <h2><a href="./post/url-jumper-chrome-extension/">URL Jumper - Chrome Extension</a></h2>
-  <div class="tagrow"><span class="tag r">Software</span></div>
-  
-  
-  <p class="excerpt">I am happy to announce the release of <i>URL Jumper</i>, a Google Chrome extension developed by Brian (Wei Hao) Ma and myself. <i>URL Jumper</i> allows jumping to URLs using customizable names.<br><br>For instance, the gaming platform <i>Steam</i> has a sub-page dedicated to the redemption of game keys. This page is not easily accessible, requiring a number of clicks to reach. Using <i>URL Jumper</i>, one can simply map the word "redeem" to the <a target="_blank" href="https://store.steampowered.com/account/registerkey" rel="noreferrer noopener">redemption URL</a>, and then they simply have to press the&hellip;</p>
-  <a class="readmore" href="./post/url-jumper-chrome-extension/">Read the post &rarr;</a>
-</article>
-
-
-  </main>
-
-  <!-- Sidebar -->
-  <aside>
-    <div class="side-card">
-      <h3><i class="fa fa-calendar"></i> Upcoming event</h3>
-      <picture><source srcset="./static/images/sunglassesAvatar.webp" type="image/webp"><img src="./static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img" width="735" height="541"></picture>
-      <div id="event-box">
-        
-          <div class="big">Halloween</div>
-          <p>October 31, 2026</p>
-        
-      </div>
-    </div>
-    <div class="side-card">
-      <h3>&#x1F918; Stay cool</h3>
-      <p>Thanks for stopping by!<br>Have a great day,<br><strong style="color:#fff;">&#8212; Ryan B. Green</strong></p>
-      <a class="btn" href="https://www.linkedin.com/in/ryan-b-green/" target="_blank" rel="noopener"><i class="fa fa-linkedin"></i> LinkedIn &#8594;</a>
-    </div>
-  </aside>
-</div>
-
-<footer>
-  <div class="tribar"></div>
-  R.B.G. &#8212; built with dark coffee and light music
-</footer>
-
-<script src="./static/js/film-quotes.js"></script>
-<script src="./static/js/site-events.js"></script>
-<script src="./static/js/site.js"></script>
-
-</body>
-</html>
