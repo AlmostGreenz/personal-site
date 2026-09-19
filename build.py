@@ -20,7 +20,7 @@ from markupsafe import Markup
 from better_profanity import profanity
 
 # ---------------------------------------------------------------- config ---
-SITE_URL = "https://almostgreenz.github.io"   # canonical URL of the Pages site
+SITE_URL = "https://almostgreenz.github.io/personal-site/"   # canonical URL of the Pages site
 # Outbound contact link (no contact form on the static site).
 LINKEDIN_URL = "https://www.linkedin.com/in/ryan-b-green/"
 # The featured film quote is fixed: one quote baked in at build time, never
@@ -133,6 +133,25 @@ def get_event(events):
     return best[1] if best else None
 
 
+def close_dangling_tags(html):
+    """Close any inline tags left open when an excerpt was cut mid-tag, so a
+    truncated card excerpt can't swallow the rest of the page's markup."""
+    stack = []
+    for m in re.finditer(r"</?([a-zA-Z][a-zA-Z0-9]*)[^>]*>", html):
+        tag = m.group(0)
+        name = m.group(1).lower()
+        if tag.startswith("</"):
+            while stack and stack[-1] != name:
+                html += "</%s>" % stack.pop()
+            if stack:
+                stack.pop()
+        elif not tag.endswith("/>") and name not in ("br", "hr", "img", "input"):
+            stack.append(name)
+    for name in reversed(stack):
+        html += "</%s>" % name
+    return html
+
+
 def process_post(raw):
     """Mirror the post-processing in application.py's index() route."""
     post = dict(raw)
@@ -143,13 +162,27 @@ def process_post(raw):
     if len(posted) > 19:
         posted = posted[: posted.index(".")]
     post["posted"] = posted
+    # "Nov 16, 2024" for the card date line.
+    try:
+        dt = datetime.strptime(posted[:19], "%Y-%m-%d %H:%M:%S")
+        post["posted_display"] = "%s %d, %d" % (dt.strftime("%b"), dt.day, dt.year)
+    except (TypeError, ValueError):
+        post["posted_display"] = posted
+    # Vimeo id for the thumbnail poster + watch link.
+    m = re.search(r"vimeo\.com/video/(\d+)", post.get("video") or "")
+    post["video_id"] = m.group(1) if m else ""
     content = (post["content"] or "").replace("\n", "<br>")
     html_in = "<" in post["posted"]
     if (len(content) > 620 and len(content[619:]) > 15) and not (
         html_in and content.count("<br>") > 6
     ):
         post["cutoff"] = True
-        post["short"] = Markup(content[:620])
+        excerpt = content[:620]
+        # don't end mid-word: cut back to the last space (if one is near)
+        sp = excerpt.rfind(" ")
+        if sp > 560:
+            excerpt = excerpt[:sp]
+        post["short"] = Markup(close_dangling_tags(excerpt))
     elif content.count("<br>") > 6:
         post["cutoff"] = True
         post["short"] = Markup("<br>".join(content.split("<br>")[:5]))
@@ -170,6 +203,10 @@ def main():
     events = load("events")
     event = get_event(events)
     posts_nav = [{"title": p["title"], "url": p["url"]} for p in posts]  # newest first
+    tag_counts = {}
+    for p in posts:
+        for t in p["tags"][:-1]:
+            tag_counts[t] = tag_counts.get(t, 0) + 1
 
     # Featured film quote: fixed, baked in at build time as the no-JS fallback.
     # Visitors with JS see the hourly "Film of the Hour" rotation instead.
@@ -188,6 +225,7 @@ def main():
             "event": event,
             "posts": posts_nav,
             "colours": TAG_COLOUR,
+            "tag_counts": tag_counts,
             "quote": quote,
             "film": film["name"],
             "year": film["year"],
@@ -198,48 +236,10 @@ def main():
         # Templates use "../static/..." in a few spots; normalize to absolute
         # first so the relativize pass below sees a uniform shape.
         html = html.replace("../static/", "/static/")
-        # The feedback route was dropped (contact form only): remove its nav
-        # link and repoint the sidebar invite at the contact page.
-        html = html.replace(
-            '  <a href="/feedback" class="w3-bar-item w3-button w3-padding-large">'
-            '<i class="fa fa-sticky-note"></i> &nbsp; Feedback</a>\n',
-            "",
-        )
-        html = html.replace(
-            "<a href='/feedback'>Click here if you would like to give feedback!</a>",
-            "<a href='/contact'>Click here if you would like to get in touch!</a>",
-        )
-        # No contact form on the static site, and per Ryan's request the LinkedIn
-        # navbar button is gone too: strip both the desktop icon and the mobile
-        # menu entry. (The sidebar "connect on LinkedIn" invite stays.)
-        html = html.replace(
-            '<a href="/contact" class="w3-bar-item w3-button w3-hide-small '
-            'w3-padding-large w3-hover-white" title="Contact">'
-            '<i class="fa fa-envelope"></i></a>',
-            "",
-        )
-        html = html.replace(
-            '<a href="/contact" class="w3-bar-item w3-button w3-padding-large">'
-            '<i class="fa fa-envelope"></i> &nbsp; Contact</a>',
-            "",
-        )
-        html = html.replace(
-            "<a href='/contact'>Click here if you would like to get in touch!</a>",
-            "<a href='%(url)s' target='_blank' rel='noopener'>"
-            "Click here to connect on LinkedIn!</a>" % {"url": LINKEDIN_URL},
-        )
-        # No CDN dependencies: vendor jQuery, Font Awesome 5, and highlight.js
+        # VisualsAplenty ships its own highlight.js from a CDN; vendor it
         # locally so the site works offline and from file://. (Inserted as
         # root-absolute paths so the relativize pass below makes them
         # page-relative like everything else.)
-        html = html.replace(
-            "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js",
-            "/static/js/jquery.min.js",
-        )
-        html = html.replace(
-            "https://use.fontawesome.com/releases/v5.15.4/js/all.js",
-            "/static/js/fa5-all.js",
-        )
         html = html.replace(
             "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js",
             "/static/js/highlight.min.js",
@@ -261,21 +261,14 @@ def main():
     ctx = base_ctx("/")
     ctx.update(posts=posts, sorted_new=True)
     html = env.get_template("index.html").render(ctx)
-    html = html.replace("href='/?sort=old'", "href='old.html'")
     write("index.html", html)
 
     # -- homepage, oldest first -------------------------------------------
+    # Same index template, posts reversed; the client-side sort toggle starts
+    # in the "Oldest first" state via sorted_new=False.
     ctx = base_ctx("/old.html")
     ctx.update(posts=list(reversed(posts)), sorted_new=False)
     html = env.get_template("index.html").render(ctx)
-    html = html.replace(
-        """<a href='/' class="w3-button w3-block w3-theme-l1 w3-left-align w3-round" """
-        """style="text-decoration: none"><i class="fa fa-sort-amount-desc fa-fw """
-        """w3-margin-right"></i> Sort</a>""",
-        """<a href='index.html' class="w3-button w3-block w3-theme-l1 w3-left-align w3-round" """
-        """style="text-decoration: none"><i class="fa fa-sort-amount-desc fa-fw """
-        """w3-margin-right"></i> Sort</a>""",
-    )
     write("old.html", html)
 
     # -- about pages (the ?choice= variants become static subpages) --------
@@ -288,9 +281,6 @@ def main():
         ctx = base_ctx("/" + rel.replace("/index.html", ""))
         ctx.update(choice=choice)
         html = env.get_template("about.html").render(ctx)
-        html = html.replace("/about?choice=doing", "/about/doing/")
-        html = html.replace("/about?choice=like", "/about/like/")
-        html = html.replace("/about?choice=going", "/about/going/")
         write(rel, html)
 
     # -- individual post pages --------------------------------------------
@@ -341,19 +331,6 @@ def main():
     # next event at page-load time so past events expire without a rebuild.
     with open(os.path.join(OUT, "static", "js", "site-events.js"), "w") as f:
         f.write("var SITE_EVENTS = " + json.dumps(events) + ";\n")
-    css_path = os.path.join(OUT, "static", "styling", "css", "styles.pure.css")
-    with open(css_path) as f:
-        css = f.read()
-    css = css.replace(
-        "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/",
-        "../../fonts/",
-    )
-    css = css.replace(
-        "https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-UFVZ0e.ttf",
-        "../../fonts/opensans-regular.ttf",
-    )
-    with open(css_path, "w") as f:
-        f.write(css)
     for name in ROOT_FILES:
         src = os.path.join(STATIC_DIR, name)
         if os.path.exists(src):

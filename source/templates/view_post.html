@@ -4,116 +4,32 @@
         - {{ post['title'] }}
 {% endblock %}
 
-<!-- Based on 'Interests' created by W3Schools -->
-{% block tags %}
-    <div class="w3-card w3-round w3-white w3-hide-small">
-      <div class="w3-container">
-        <br>
-        <p>Tags</p>
-        <p>
-          {% for tag in post['tags'][:-1] %}
-            <span class="w3-tag w3-small w3-theme-{{ colours[tag] }}">{{ tag }}</span>
-          {% endfor %}
-        </p>
-      </div>
+{% block content %}
+<div class="quote-block">
+  <div class="quote-label"><i class="fa fa-film"></i> Film of the hour</div>
+  <p class="quote-text" id="film-quote">&#8220;{{ quote }}&#8221;</p>
+  <div class="quote-cite" id="film-cite">&#8212; <em>{{ film }}</em>, {{ year }} &middot; rotates every hour</div>
+</div>
+
+{% set tagc = {'Software': 'r', 'Python': 'b', 'Games': 'g', 'Arduino': 'v', 'Misc.': 'o'} %}
+<div class="post-full" style="--accent: var(--{{ tagc[post['tags'][0]] if post['tags'] else 'r' }});">
+  <div class="post-date" style="color: var(--{{ tagc[post['tags'][0]] if post['tags'] else 'r' }});">{{ post['posted_display'] }}</div>
+  <h2>{{ post['title'] }}</h2>
+  <div class="tagrow">{% for tag in post['tags'][:-1] %}<span class="tag {{ tagc[tag] }}">{{ tag }}</span>{% endfor %}</div>
+  {% if post['video'] %}
+  <a class="video-link" href="https://vimeo.com/{{ post['video_id'] }}" target="_blank" rel="noopener"><img src="/static/images/video-thumbs/{{ post['video_id'] }}.jpg" alt="{{ post['title'] }} demo video"><span class="video-play"><i class="fa fa-play"></i></span></a>
+  {% endif %}
+  {% if post['images'] %}
+  <div class="gallery">
+    <img class="gallery-lead" src="/static/images/{{ post['images'][0] }}" alt="Post image">
+    {% if post['images']|length > 1 %}
+    <div class="gallery-thumbs">
+      {% for img in post['images'] %}<img src="/static/images/{{ img }}" data-full="/static/images/{{ img }}" alt="Thumbnail {{ loop.index }}" class="{% if loop.first %}active{% endif %}">{% endfor %}
     </div>
-{% endblock %}
-
-{% block body %}
-  <h6 class="w3-opacity">Quote From the Film of the Hour:</h6>
-
-  <p style="font-size:14px;" class="w3-border w3-padding" id="film-quote">{{ quote }}</p>
-  <span class="w3-right w3-opacity w3-bold" id="film-cite">— <b> <i>{{ film }}</i>, {{ year }}</b></span>
-  <script src="/static/js/film-quotes.js"></script>
-  <script>
-    // "Film of the Hour": one film per hour, same for every visitor.
-    // The hour timestamp hashed to an index keeps it deterministic without
-    // repeating the same film in consecutive hours.
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof FILM_QUOTES === "undefined" || !FILM_QUOTES.length) return;
-      var hour = Math.floor(Date.now() / 3600000);
-      var pick = FILM_QUOTES[(hour * 2654435761) % FILM_QUOTES.length];
-      document.getElementById("film-quote").textContent = pick.quote;
-      document.getElementById("film-cite").innerHTML =
-        "— <b><i>" + pick.name + "</i>, " + pick.year + "</b>";
-    });
-  </script>
-
-  <script>
-    //from https://css-tricks.com/the-complete-guide-to-lazy-loading-images/
-    document.addEventListener("DOMContentLoaded",function(){var a;if("IntersectionObserver"in window){a=document.querySelectorAll(".lazy");var b=new IntersectionObserver(function(a){a.forEach(function(a){if(a.isIntersecting){var c=a.target;c.src=c.dataset.src,c.classList.remove("lazy"),b.unobserve(c)}})});a.forEach(function(a){b.observe(a)})}else{function b(){c&&clearTimeout(c),c=setTimeout(function(){var c=window.pageYOffset;a.forEach(function(a){a.offsetTop<window.innerHeight+c&&(a.src=a.dataset.src,a.classList.remove("lazy"))}),0==a.length&&(document.removeEventListener("scroll",b),window.removeEventListener("resize",b),window.removeEventListener("orientationChange",b))},20)}var c;a=document.querySelectorAll(".lazy"),document.addEventListener("scroll",b),window.addEventListener("resize",b),window.addEventListener("orientationChange",b)}});
-  </script>
-{% endblock %}
-
-{% block middle %}
-  <div class="filterDiv {{ post['tags'][-1] }}show w3-container w3-card w3-white w3-round w3-margin"><br>
-    <img src="/static/images/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-    <br>
-    <span class="w3-right w3-opacity">{{ post['posted'] }}</span>
-    <h4> {{ post['title'] }} </h4>
-    <hr class="w3-clear">
-    <p style="font-size:14px">{{ post['content'] }}</p>
-    <hr class="w3-clear">
-      <div class="w3-row-padding" style="margin:0 -16px">
-        {% if post['video'] %}
-          <button onclick="myFunction('vid')" class="w3-button w3-block w3-theme-l1 w3-left-align" style="outline: none"><i class="fa fa-play fa-fw w3-margin-right"></i> Video</button>
-          <div id="vid" class="w3-hide w3-container">
-            <iframe src="{{ post['video'] }}" style="width: 100%; height: 400px; border: none;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
-          </div>
-
-          {% if not post['images'] %}
-            <hr class="w3-clear">
-          {% endif %}
-
-        {% endif %}
-        {% if post['images'] %}
-          <link rel="stylesheet" href="../static/styling/css/bootstrap.min.css">
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-          <script src="../static/styling/js/bootstrap.min.js"></script>
-
-          <button onclick="myFunction('imgs')" class="w3-button w3-block w3-theme-l1 w3-left-align" style="outline: none"><i class="fa fa-camera fa-fw w3-margin-right"></i> {{ 'Image' if post['images']|length == 1 else 'Images' }}</button>
-          <div id="imgs" class="w3-hide w3-container">
-            <!-- From Bootstrap -->
-            <div id="slideshow" class="carousel slide" data-ride="carousel" style="width: auto; height: auto;">
-              {% if post['images']|length > 1 %}
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                  <li data-target="#slideshow" data-slide-to="0" class="active"></li>
-                  {% for image in range(1, post['images']|length) %}
-                    <li data-target="#slideshow" data-slide-to="{{ image }}"></li>
-                  {% endfor %}
-                </ol>
-              {% endif %}
-
-              <!-- slide wrapper -->
-              <div class="carousel-inner">
-                <div class="item active">
-                  <img src="/static/placeholders/LQ{{ post['images'][0] }}" data-src="/static/images/{{ post['images'][0] }}" alt="Image 1" class="lazy" style="margin: auto">
-                </div>
-                {% for image in range(1, post['images']|length) %}
-                  <div class="item">
-                    <img src="/static/placeholders/LQ{{ post['images'][image] }}" data-src="/static/images/{{ post['images'][image] }}" alt="Image {{ image + 1 }}" class="lazy" style="margin: auto">
-                  </div>
-                {% endfor %}
-              </div>
-
-              {% if post['images']|length > 1 %}
-                <!-- controls -->
-                <a class="left carousel-control" href="#slideshow" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#slideshow" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              {% endif %}
-            </div>
-          </div>
-          <hr class="w3-clear">
-        {% endif %}
-        <a href="/" class="w3-button w3-theme-d1 w3-margin-bottom" style="float: right; text-decoration: none;"><i class="fa fa-mail-reply fa-lg"></i>&emsp;Return to Home</a>
-    </div>
+    {% endif %}
   </div>
+  {% endif %}
+  <div class="body-text">{{ post['content'] }}</div>
+  <p style="margin-top: 24px;"><a href="/" class="btn-return" style="float:none;"><i class="fa fa-mail-reply fa-lg"></i> Return to Home</a></p>
+</div>
 {% endblock %}
-

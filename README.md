@@ -22,12 +22,16 @@ site's database; `build.py` renders them into the deployable site in `docs/`.
 │                        events disappear on their own — rebuild only to add
 │                        or change events.
 ├── assets/              third-party files vendored locally so the site has no
-│   ├── fonts/           CDN dependencies: Font Awesome fonts, Open Sans
-│   ├── js/              jQuery, Font Awesome 5, highlight.js
+│   ├── fonts/           CDN dependencies: Font Awesome fonts, Open Sans,
+│   │                    Bricolage Grotesque (display type)
+│   ├── js/              highlight.js (used by the VisualsAplenty subsite)
 │   └── css/             highlight.js theme
 ├── source/
-│   ├── templates/       page templates (Jinja2, carried over from the Flask app)
-│   └── static/          images, CSS, and other static files from the original site
+│   ├── templates/       Jinja2 page templates (the "bold & personal" redesign)
+│   └── static/
+│       ├── styling/css/ bold.css — the site's stylesheet (no frameworks)
+│       ├── js/          site.js — filters, sort, galleries, quote/event rotation
+│       └── images/      photos, avatar, Vimeo thumbnail posters
 └── docs/                the generated output — this is what GitHub Pages serves
     ├── index.html
     ├── old.html

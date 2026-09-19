@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <title>R.B.G.
         - Guardians of the Galaxy Asteroids ‒ Concept Game
 </title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../../static/styling/css/styles.pure.css">
+<link rel="stylesheet" href="../../static/styling/css/bold.css">
 <link rel="apple-touch-icon" sizes="180x180" href="../../static/apple-touch-icon.png?v=3">
 <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicon-32x32.png?v=3">
 <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicon-16x16.png?v=3">
@@ -15,323 +16,124 @@
 <meta name="msapplication-TileColor" content="#00a300">
 <meta name="msapplication-config" content="../../static/browserconfig.xml?v=3">
 <meta name="theme-color" content="#6eb929">
-
-<body class="w3-theme-l5">
+</head>
+<body>
 
 <!-- Navbar -->
-<div class="w3-top">
- <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="../../" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" style="text-decoration: none" title="Home"><i class="fa fa-home w3-margin-right"></i><span style='color: #C05949'>R.</span><span style='color: #247DF5'>B.</span><span style='color: #69CA31'>G.</span></a>
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Recent Posts"><i class="fa fa-newspaper-o"></i><span class="w3-badge w3-right w3-small w3-green">19</span></button>
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="../../"><span class="r">R.</span><span class="b">B.</span><span class="g">G.</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fa fa-bars"></i></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../../" class="">Home</a>
+      <a href="../../about/" class="">About</a>
       
-        
-          <a href="../../post/url-jumper-chrome-extension/" class="w3-bar-item w3-button"> URL Jumper - Chrome Extension </a>
-        
-          <a href="../../post/shifting-perspective-a-unity-puzzleplatformer/" class="w3-bar-item w3-button"> Shifting Perspective - A Unity Puzzle-Platformer </a>
-        
-          <a href="../../post/poker-hand-captcha/" class="w3-bar-item w3-button"> Poker Hand CAPTCHA </a>
-        
-          <a href="../../post/flowy-for-unicef/" class="w3-bar-item w3-button"> Flowy for UNICEF </a>
-        
-          <a href="../../post/samaritan-a-highfidelity-prototype/" class="w3-bar-item w3-button"> Samaritan - A High-Fidelity Prototype </a>
-        
-          <a href="../../post/too-fit-to-quit-calgaryhacks-2022/" class="w3-bar-item w3-button"> Too Fit to Quit - CalgaryHacks 2022 </a>
-        
-          <a href="../../post/visualsaplenty-a-javascript-graphing-library/" class="w3-bar-item w3-button"> VisualsAplenty - A JavaScript Graphing Library </a>
-        
-          <a href="../../post/short-story-published-by-ghost-orchid-press/" class="w3-bar-item w3-button"> Short Story Published by Ghost Orchid Press </a>
-        
-          <a href="../../post/virtual-meeting-maestro-uofthacks-viii/" class="w3-bar-item w3-button"> Virtual Meeting Maestro - UofTHacks VIII </a>
-        
-          <a href="../../post/dig-dug-recreation/" class="w3-bar-item w3-button"> Dig Dug Recreation </a>
-        
-      
-    </div>
+      <div class="nav-news">
+        <a href="../../#posts" class="icon-link posts-link" id="newsToggle" title="All Posts" aria-haspopup="true" aria-expanded="false"><i class="fa fa-newspaper-o"></i><span class="nav-badge">19</span></a>
+        <div class="news-dropdown" id="newsDropdown" role="menu" aria-label="All posts">
+          <div class="news-dropdown-head">All Posts <span>19</span></div>
+          <ul>
+            
+            <li><a href="../../post/url-jumper-chrome-extension/">URL Jumper - Chrome Extension</a></li>
+            
+            <li><a href="../../post/shifting-perspective-a-unity-puzzleplatformer/">Shifting Perspective - A Unity Puzzle-Platformer</a></li>
+            
+            <li><a href="../../post/poker-hand-captcha/">Poker Hand CAPTCHA</a></li>
+            
+            <li><a href="../../post/flowy-for-unicef/">Flowy for UNICEF</a></li>
+            
+            <li><a href="../../post/samaritan-a-highfidelity-prototype/">Samaritan - A High-Fidelity Prototype</a></li>
+            
+            <li><a href="../../post/too-fit-to-quit-calgaryhacks-2022/">Too Fit to Quit - CalgaryHacks 2022</a></li>
+            
+            <li><a href="../../post/visualsaplenty-a-javascript-graphing-library/">VisualsAplenty - A JavaScript Graphing Library</a></li>
+            
+            <li><a href="../../post/short-story-published-by-ghost-orchid-press/">Short Story Published by Ghost Orchid Press</a></li>
+            
+            <li><a href="../../post/virtual-meeting-maestro-uofthacks-viii/">Virtual Meeting Maestro - UofTHacks VIII</a></li>
+            
+            <li><a href="../../post/dig-dug-recreation/">Dig Dug Recreation</a></li>
+            
+            <li><a href="../../post/guardians-of-the-galaxy-asteroids-concept-game/">Guardians of the Galaxy Asteroids ‒ Concept Game</a></li>
+            
+            <li><a href="../../post/arduino-3d-scanner/">Arduino 3-D Scanner</a></li>
+            
+            <li><a href="../../post/knight-rider-kitt-scanner-lights/">Knight Rider: KITT Scanner Lights</a></li>
+            
+            <li><a href="../../post/star-wars-defenders-of-hoth-arcade-game/">Star Wars: Defenders of Hoth ‒ Arcade Game</a></li>
+            
+            <li><a href="../../post/galaga-bouncing-animation/">Galaga Bouncing Animation</a></li>
+            
+            <li><a href="../../post/the-fretboard-connection-a-guitar/">The Fretboard Connection ‒ A Guitar Hero-esque Rhythm Game</a></li>
+            
+            <li><a href="../../post/greenbot-the-interactive-robot/">GreenBot the Interactive Robot</a></li>
+            
+            <li><a href="../../post/r2d2-keychain-3d-model/">R2-D2 Keychain 3-D Model</a></li>
+            
+            <li><a href="../../post/arduino-alarm-clock/">Arduino Alarm Clock</a></li>
+            
+          </ul>
+          <a href="../../#posts" class="news-dropdown-foot posts-link">Browse by tag <i class="fa fa-arrow-down"></i></a>
+        </div>
+      </div>
+    </nav>
   </div>
-  <a href="../../about/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="About"><i class="fa fa-user"></i></a>
-  
-  
-    <a></a>
-  
- </div>
-</div>
+  <div class="tribar"></div>
+</header>
 
-<!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <br><br>
-  <a href="../../about/" class="w3-bar-item w3-button w3-padding-large"><i class="fa fa-user"></i> &nbsp; About</a>
-  
-</div>
-
-
-<!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
-  
-  
-  <!-- The Grid -->
-  <div class="w3-row">
-    <!-- Left Column -->
-    <div class="w3-col m3">
-      <!-- Profile -->
-      <div class="w3-card w3-round w3-white">
-        <div class="w3-container">
-         <h5 class="w3-center" style="padding-top: 8px;">Ryan B. Green</h5>
-         <p class="w3-center"><img src="../../static/images/avatar.png" style="height:106px;width:106px" alt="Avatar"></p>
-         <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Software Dev Engineer</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Toronto, ON / Vancouver, BC</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> November 10th, 2001</p>
-        </div>
-      </div>
-      <br>
-
-      <!-- Accordion -->
-      <div class="w3-card w3-round">
-        <div class="w3-green">
-          <button onclick="myFunction('Tab1')" class="w3-button w3-block w3-theme-l1 w3-left-align" style="outline: none"><i class="fa fa-users fa-fw w3-margin-right"></i> Affiliations</button>
-          <ul id="Tab1" class="list-group w3-hide">
-              <li class="list-group-item list-group-item-success">University of Toronto</li>
-              <li class="list-group-item list-group-item-success">Trinity College</li>
-              <li class="list-group-item list-group-item-success">Gryffindor</li>
-          </ul>
-          <button onclick="myFunction('Tab2')" class="w3-button w3-block w3-theme-l1 w3-left-align" style="outline: none"><i class="fa fa fa-share-square-o fa-fw w3-margin-right"></i> Share</button>
-          <ul id="Tab2" class="list-group w3-hide">
-              <li><a target="_blank" href="http://www.reddit.com/submit?url=https://almostgreenz.github.io/post/guardians-of-the-galaxy-asteroids-concept-game&title=Ryan%20B%2E%20Green" class="list-group-item list-group-item-action list-group-item-success" rel="noreferrer noopener"><i class="fa fa-reddit-alien fa-lg"></i>&emsp; Share to Reddit</a></li>
-              <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://almostgreenz.github.io/post/guardians-of-the-galaxy-asteroids-concept-game" class="list-group-item list-group-item-action list-group-item-success" rel="noreferrer noopener"><i class="fa fa-facebook-f fa-lg"></i>&emsp; Share to Facebook</a></li>
-              <li><a target="_blank" href="http://www.twitter.com/share?url=https://almostgreenz.github.io/post/guardians-of-the-galaxy-asteroids-concept-game" class="list-group-item list-group-item-action list-group-item-success" rel="noreferrer noopener"><i class="fa fa-twitter fa-lg"></i>&emsp; Share to Twitter</a></li>
-          </ul>
-        </div>
-      </div>
-      <br>
-
-      <!-- Tags -->
-      
-    <div class="w3-card w3-round w3-white w3-hide-small">
-      <div class="w3-container">
-        <br>
-        <p>Tags</p>
-        <p>
-          
-            <span class="w3-tag w3-small w3-theme-d2">Python</span>
-          
-            <span class="w3-tag w3-small w3-theme-l2">Software</span>
-          
-            <span class="w3-tag w3-small w3-theme-l3">Games</span>
-          
-        </p>
-      </div>
-    </div>
-
-      <br>
-
-      <!-- Alert Box -->
-      <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
-        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
-          <i class="fa fa-remove"></i>
-        </span>
-        <p style="margin-top: 10px; margin-bottom: 1px;"><strong>Hey!</strong></p>
-        <p>
-          Thank you for stopping by!
-          <br>
-          <a href='https://www.linkedin.com/in/ryan-b-green/' target='_blank' rel='noopener'>Click here to connect on LinkedIn!</a>
-          <br>
-          Have a great day,
-          <br>
-          - <b>Ryan B. Green</b>
-        </p>
-      </div>
-
-    <!-- End Left Column -->
-    </div>
-
-    <!-- Middle Column -->
-    <div class="w3-col m7">
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding">
-              
-  <h6 class="w3-opacity">Quote From the Film of the Hour:</h6>
-
-  <p style="font-size:14px;" class="w3-border w3-padding" id="film-quote">The only winning move is not to play.</p>
-  <span class="w3-right w3-opacity w3-bold" id="film-cite">— <b> <i>WarGames</i>, 1983</b></span>
-  <script src="../../static/js/film-quotes.js"></script>
-  <script>
-    // "Film of the Hour": one film per hour, same for every visitor.
-    // The hour timestamp hashed to an index keeps it deterministic without
-    // repeating the same film in consecutive hours.
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof FILM_QUOTES === "undefined" || !FILM_QUOTES.length) return;
-      var hour = Math.floor(Date.now() / 3600000);
-      var pick = FILM_QUOTES[(hour * 2654435761) % FILM_QUOTES.length];
-      document.getElementById("film-quote").textContent = pick.quote;
-      document.getElementById("film-cite").innerHTML =
-        "— <b><i>" + pick.name + "</i>, " + pick.year + "</b>";
-    });
-  </script>
-
-  <script>
-    //from https://css-tricks.com/the-complete-guide-to-lazy-loading-images/
-    document.addEventListener("DOMContentLoaded",function(){var a;if("IntersectionObserver"in window){a=document.querySelectorAll(".lazy");var b=new IntersectionObserver(function(a){a.forEach(function(a){if(a.isIntersecting){var c=a.target;c.src=c.dataset.src,c.classList.remove("lazy"),b.unobserve(c)}})});a.forEach(function(a){b.observe(a)})}else{function b(){c&&clearTimeout(c),c=setTimeout(function(){var c=window.pageYOffset;a.forEach(function(a){a.offsetTop<window.innerHeight+c&&(a.src=a.dataset.src,a.classList.remove("lazy"))}),0==a.length&&(document.removeEventListener("scroll",b),window.removeEventListener("resize",b),window.removeEventListener("orientationChange",b))},20)}var c;a=document.querySelectorAll(".lazy"),document.addEventListener("scroll",b),window.addEventListener("resize",b),window.addEventListener("orientationChange",b)}});
-  </script>
-
-          </div>
-
-        </div>
-        
-        
-      </div>
-
-    </div>
+<!-- Page -->
+<div class="page">
+  <main>
     
-  <div class="filterDiv Python Software Games show w3-container w3-card w3-white w3-round w3-margin"><br>
-    <img src="../../static/images/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-    <br>
-    <span class="w3-right w3-opacity">2020-08-18 17:19:32</span>
-    <h4> Guardians of the Galaxy Asteroids ‒ Concept Game </h4>
-    <hr class="w3-clear">
-    <p style="font-size:14px">In early 2019, I was introduced to Object Oriented Programming and returned to Processing.py to test out my new <i>powers</i>. I decided to recreate the classic 1979 arcade game Asteroids themed after <a target="_blank" href="https://youtu.be/5ROiWmnWJHw?t=98" rel="noreferrer noopener">the asteroid evasion scene in Guardians of the Galaxy Vol. 2</a>. <br><br>Unfortunately, I never completed the game. However, nearly all of the core features are already implemented: the asteroids split when hit, the player's ship experiences acceleration, points are assigned when asteroids are destroyed, and the player's lives decrease when killed (but there is no way for the game to end as it stands right now).<br><br>If you want to try it for yourself (or even mess around with the code if you like), check out the game's GitHub repository below:<br><br><a target="_blank" href="https://github.com/AlmostGreenz/guardians-of-the-galaxy-asteroids" rel="noreferrer noopener" class="w3-button w3-theme-d2 w3-margin-bottom" style="text-decoration: none;"><i class="fa fa-github fa-lg"></i> Go to GitHub Page </a></p>
-    <hr class="w3-clear">
-      <div class="w3-row-padding" style="margin:0 -16px">
-        
-          <button onclick="myFunction('vid')" class="w3-button w3-block w3-theme-l1 w3-left-align" style="outline: none"><i class="fa fa-play fa-fw w3-margin-right"></i> Video</button>
-          <div id="vid" class="w3-hide w3-container">
-            <iframe src="https://player.vimeo.com/video/449045523?title=0&byline=0&portrait=0&badge=0&quality=1080p&loop=1&dnt=1" style="width: 100%; height: 400px; border: none;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
-          </div>
-
-          
-            <hr class="w3-clear">
-          
-
-        
-        
-        <a href="../../" class="w3-button w3-theme-d1 w3-margin-bottom" style="float: right; text-decoration: none;"><i class="fa fa-mail-reply fa-lg"></i>&emsp;Return to Home</a>
-    </div>
-  </div>
-
-    <!-- End Middle Column -->
-    </div>
-
-    <!-- Right Column -->
-    <div class="w3-col m2">
-        <div class="w3-card w3-round w3-white w3-center">
-          <div class="w3-container">
-            <p style="padding-top: 10px;">Upcoming Event:</p>
-            <img src="../../static/images/sunglassesAvatar.png" alt="Events" style="width:100%;">
-            <div id="event-box">
-            
-              <p style="padding-top: 10px;"><strong>Halloween</strong></p>
-              
-              <p style="line-height: 16px;">October 31, 2026</p>
-              
-            
-            </div>
-            <script src="../../static/js/site-events.js"></script>
-            <script>
-              // Pick the next upcoming event at page-load time (one-time or
-              // yearly recurring) so past events expire on their own without
-              // needing a rebuild.
-              document.addEventListener("DOMContentLoaded", function () {
-                if (typeof SITE_EVENTS === "undefined") return;
-                function esc(s) {
-                  return String(s).replace(/[&<>"']/g, function (c) {
-                    return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c];
-                  });
-                }
-                var today = new Date();
-                today.setHours(0, 0, 0, 0);
-                var best = null, bestDate = null;
-                SITE_EVENTS.forEach(function (e) {
-                  var d = null;
-                  if (e.recurring === "yearly" && e.month && e.day) {
-                    d = new Date(today.getFullYear(), e.month - 1, e.day);
-                    if (d < today) d = new Date(today.getFullYear() + 1, e.month - 1, e.day);
-                  } else if (e.scheduled) {
-                    d = new Date(e.scheduled.slice(0, 10) + "T00:00:00");
-                    if (d < today) return;
-                  } else {
-                    return;
-                  }
-                  if (!bestDate || d < bestDate) { bestDate = d; best = e; }
-                });
-                var box = document.getElementById("event-box");
-                if (!box) return;
-                if (!best) {
-                  box.innerHTML = '<p style="padding-top: 5px;"><strong>No Events Scheduled</strong></p>';
-                  return;
-                }
-                var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                var html = '<p style="padding-top: 10px;"><strong>' + esc(best.name) + '</strong></p>';
-                if (best.start) {
-                  html += '<p style="line-height: 16px;">' + esc(best.start) + '</p>';
-                  html += '<hr style="line-height: 16px; width:30px; margin: auto; padding-bottom: 10px;">';
-                }
-                html += '<p style="line-height: 16px;">' + months[bestDate.getMonth()] + ' ' + bestDate.getDate() + ', ' + bestDate.getFullYear() + '</p>';
-                if (best.info) {
-                  html += '<a target="_blank" href="' + esc(best.info) + '" class="w3-button w3-block w3-theme-l4" style="margin-bottom: -6px;" rel="noreferrer noopener">Info</a><br>';
-                }
-                box.innerHTML = html;
-              });
-            </script>
-          </div>
-        </div>
-        <br>
-
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container">
-          <br>
-          <img src="../../static/images/catchthewave.png" alt="Catch the Wave" style="width:65%"><br>
-          <h5 style="padding: 5px; color: #00CCCC">Stay Cool</h5>
-        </div>
-      </div>
-      <br>
-
-      
-      
-      <br>
-
-      <!--<div class="w3-card w3-round w3-white w3-padding-16 w3-center">
-        <p>ADS</p>
-      </div>
-      <br>-->
-
-    <!-- End Right Column -->
-    </div>
-
-  <!-- End Grid -->
-  </div>
-
-<!-- End Page Container -->
+<div class="quote-block">
+  <div class="quote-label"><i class="fa fa-film"></i> Film of the hour</div>
+  <p class="quote-text" id="film-quote">&#8220;The only winning move is not to play.&#8221;</p>
+  <div class="quote-cite" id="film-cite">&#8212; <em>WarGames</em>, 1983 &middot; rotates every hour</div>
 </div>
-<br>
 
-<script>
-// Accordion
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-theme-d1";
-  } else {
-    x.className = x.className.replace("w3-show", "");
-    x.previousElementSibling.className =
-    x.previousElementSibling.className.replace(" w3-theme-d1", "");
-  }
-}
 
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else {
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
+<div class="post-full" style="--accent: var(--b);">
+  <div class="post-date" style="color: var(--b);">Aug 18, 2020</div>
+  <h2>Guardians of the Galaxy Asteroids ‒ Concept Game</h2>
+  <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag g">Games</span></div>
+  
+  <a class="video-link" href="https://vimeo.com/449045523" target="_blank" rel="noopener"><img src="../../static/images/video-thumbs/449045523.jpg" alt="Guardians of the Galaxy Asteroids ‒ Concept Game demo video"><span class="video-play"><i class="fa fa-play"></i></span></a>
+  
+  
+  <div class="body-text">In early 2019, I was introduced to Object Oriented Programming and returned to Processing.py to test out my new <i>powers</i>. I decided to recreate the classic 1979 arcade game Asteroids themed after <a target="_blank" href="https://youtu.be/5ROiWmnWJHw?t=98" rel="noreferrer noopener">the asteroid evasion scene in Guardians of the Galaxy Vol. 2</a>. <br><br>Unfortunately, I never completed the game. However, nearly all of the core features are already implemented: the asteroids split when hit, the player's ship experiences acceleration, points are assigned when asteroids are destroyed, and the player's lives decrease when killed (but there is no way for the game to end as it stands right now).<br><br>If you want to try it for yourself (or even mess around with the code if you like), check out the game's GitHub repository below:<br><br><a target="_blank" href="https://github.com/AlmostGreenz/guardians-of-the-galaxy-asteroids" rel="noreferrer noopener" class="w3-button w3-theme-d2 w3-margin-bottom" style="text-decoration: none;"><i class="fa fa-github fa-lg"></i> Go to GitHub Page </a></div>
+  <p style="margin-top: 24px;"><a href="../../" class="btn-return" style="float:none;"><i class="fa fa-mail-reply fa-lg"></i> Return to Home</a></p>
+</div>
+
+  </main>
+
+  <!-- Sidebar -->
+  <aside>
+    <div class="side-card">
+      <h3><i class="fa fa-calendar"></i> Upcoming event</h3>
+      <img src="../../static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img">
+      <div id="event-box">
+        
+          <div class="big">Halloween</div>
+          <p>October 31, 2026</p>
+        
+      </div>
+    </div>
+    <div class="side-card">
+      <h3>&#x1F918; Stay cool</h3>
+      <p>Thanks for stopping by!<br>Have a great day,<br><strong style="color:#fff;">&#8212; Ryan B. Green</strong></p>
+      <a class="btn" href="https://www.linkedin.com/in/ryan-b-green/" target="_blank" rel="noopener"><i class="fa fa-linkedin"></i> LinkedIn &#8594;</a>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="tribar"></div>
+  R.B.G. &#8212; built with dark coffee and light music
+</footer>
+
+<script src="../../static/js/film-quotes.js"></script>
+<script src="../../static/js/site-events.js"></script>
+<script src="../../static/js/site.js"></script>
 
 </body>
 </html>
