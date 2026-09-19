@@ -368,3 +368,5 @@ footer .tribar { height: 4px; border-radius: 2px; max-width: 200px; margin: 0 au
 [data-theme="dark"] .gallery-lead { background: #22282f; }
 [data-theme="dark"] .side-card { background: #171c22; }
 [data-theme="dark"] .side-card a.btn { color: #101418; }
+[data-theme="dark"] .top-tags .tag { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+[data-theme="dark"] .top-tags .tag small { color: var(--muted); opacity: 1; }
