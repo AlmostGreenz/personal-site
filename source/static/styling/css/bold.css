@@ -61,6 +61,7 @@ i.fa { margin-right: .35em; }
 .fa-space-shuttle:before { content: "\f197"; }
 .fa-mail-reply:before { content: "\f112"; }
 .fa-bars:before { content: "\f0c9"; }
+.fa-arrow-down:before { content: "\f063"; }
 .fa-moon-o:before { content: "\f186"; }
 .fa-sun-o:before { content: "\f185"; }
 
