@@ -13,7 +13,6 @@ import os
 import random
 import re
 import shutil
-import time
 from datetime import date, datetime
 
 from jinja2 import Environment, FileSystemLoader
@@ -24,6 +23,9 @@ from better_profanity import profanity
 SITE_URL = "https://almostgreenz.github.io"   # canonical URL of the Pages site
 # Outbound contact link (no contact form on the static site).
 LINKEDIN_URL = "https://www.linkedin.com/in/ryan-b-green/"
+# The featured film quote is fixed: one quote baked in at build time, never
+# changes between builds or page loads. Set to any name in data/films.json.
+FEATURED_FILM_NAME = "WarGames"
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 # Portable: templates and static assets live in ./source/ next to this script.
@@ -169,12 +171,9 @@ def main():
     event = get_event(events)
     posts_nav = [{"title": p["title"], "url": p["url"]} for p in posts]  # newest first
 
-    # No-JS fallback for the Film of the Hour: derive it from the current hour
-    # with the same hash the client-side script uses, so the fallback agrees
-    # with what JS visitors see instead of changing on every rebuild.
-    hour = int(time.time() // 3600)
-    quoted_films = [f for f in films if f["name"] in quotes]
-    film = quoted_films[(hour * 2654435761) % len(quoted_films)]
+    # Featured film quote: fixed, baked in at build time as the no-JS fallback.
+    # Visitors with JS see the hourly "Film of the Hour" rotation instead.
+    film = next((f for f in films if f["name"] == FEATURED_FILM_NAME), films[0])
     quote = profanity.censor(quotes.get(film["name"], ""))
 
     if os.path.exists(OUT):
@@ -328,9 +327,9 @@ def main():
         src = os.path.join(BASE, "assets", sub)
         if os.path.isdir(src):
             shutil.copytree(src, os.path.join(OUT, "static", sub), dirs_exist_ok=True)
-    # Bake every film+quote into a JS file so each page load can pick a new
-    # "Film of the Hour" client-side (the old Wikiquote API is dead, and the
-    # static pages can't rotate it at serve time).
+    # Bake every film+quote into a JS file so the "Film of the Hour" rotates
+    # hourly client-side (the old Wikiquote API is dead, and the static
+    # pages can't rotate it at serve time).
     film_quotes = [
         {"name": f["name"], "year": f["year"], "quote": quotes[f["name"]]}
         for f in films
@@ -364,7 +363,7 @@ def main():
 
     n_files = sum(len(fs) for _, _, fs in os.walk(OUT))
     print("\ndone: %d files in %s" % (n_files, OUT))
-    print("film of the hour: %s (%s)" % (film["name"], film["year"]))
+    print("featured film: %s (%s)" % (film["name"], film["year"]))
 
 
 if __name__ == "__main__":
