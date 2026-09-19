@@ -162,7 +162,8 @@
     function checkFit() {
       if (!lead.naturalWidth) return;
       var ar = lead.naturalWidth / lead.naturalHeight;
-      lead.classList.toggle("fit-contain", ar > 2.4 || ar < 1.0);
+      /* Contain anything that isn't close to 16:9 — wide AND tall images. */
+      lead.classList.toggle("fit-contain", Math.abs(ar - 16 / 9) > 0.2);
     }
     if (lead.complete) checkFit();
     else lead.addEventListener("load", checkFit);
@@ -171,6 +172,7 @@
         lead.src = t.getAttribute("data-full");
         thumbs.forEach(function (o) { o.classList.remove("active"); });
         t.classList.add("active");
+        lead.addEventListener("load", checkFit, { once: true });
       });
     });
   });
