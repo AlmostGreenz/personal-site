@@ -51,7 +51,7 @@
   <h2><a href="/post/{{ post['url'] }}/">{{ post['title'] }}</a></h2>
   <div class="tagrow">{% for tag in post['tags'][:-1] %}<span class="tag {{ tagc[tag] }}">{{ tag }}</span>{% endfor %}</div>
   {% if post['video'] %}
-  <a class="video-link" href="https://vimeo.com/{{ post['video_id'] }}" target="_blank" rel="noopener"><img src="/static/images/video-thumbs/{{ post['video_id'] }}.jpg" alt="{{ post['title'] }} demo video"><span class="video-play"><i class="fa fa-play"></i></span></a>
+  <a class="video-link" data-vimeo-id="{{ post['video_id'] }}" href="https://vimeo.com/{{ post['video_id'] }}" target="_blank" rel="noopener"><img src="/static/images/video-thumbs/{{ post['video_id'] }}.jpg" alt="{{ post['title'] }} demo video"><span class="video-play"><i class="fa fa-play"></i></span></a>
   {% endif %}
   {% if post['images'] %}
   <div class="gallery">

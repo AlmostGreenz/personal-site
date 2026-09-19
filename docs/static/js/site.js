@@ -194,4 +194,19 @@
       ring.style.transform = "";
     });
   }
+
+  /* Click-to-play Vimeo embeds: swap the thumbnail link for the player inline.
+     No-JS fallback: the link still opens the video on vimeo.com. */
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest ? e.target.closest("a.video-link[data-vimeo-id]") : null;
+    if (!link) return;
+    e.preventDefault();
+    var frame = document.createElement("iframe");
+    frame.className = "video-embed";
+    frame.src = "https://player.vimeo.com/video/" + link.getAttribute("data-vimeo-id") + "?autoplay=1";
+    frame.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+    frame.setAttribute("allowfullscreen", "");
+    frame.setAttribute("title", "Embedded video player");
+    link.replaceWith(frame);
+  });
 })();
