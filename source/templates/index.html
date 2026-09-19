@@ -25,8 +25,22 @@
 {% block body %}
   <h6 class="w3-opacity">Quote From the Film of the Hour:</h6>
 
-  <p style="font-size:14px" class="w3-border w3-padding">{{ quote }}</p>
-  <span class="w3-right w3-opacity w3-bold">— <b> <i>{{ film }}</i>, {{ year }}</b></span>
+  <p style="font-size:14px" class="w3-border w3-padding" id="film-quote">{{ quote }}</p>
+  <span class="w3-right w3-opacity w3-bold" id="film-cite">— <b> <i>{{ film }}</i>, {{ year }}</b></span>
+  <script src="/static/js/film-quotes.js"></script>
+  <script>
+    // "Film of the Hour": one film per hour, same for every visitor.
+    // The hour timestamp hashed to an index keeps it deterministic without
+    // repeating the same film in consecutive hours.
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof FILM_QUOTES === "undefined" || !FILM_QUOTES.length) return;
+      var hour = Math.floor(Date.now() / 3600000);
+      var pick = FILM_QUOTES[(hour * 2654435761) % FILM_QUOTES.length];
+      document.getElementById("film-quote").textContent = pick.quote;
+      document.getElementById("film-cite").innerHTML =
+        "— <b><i>" + pick.name + "</i>, " + pick.year + "</b>";
+    });
+  </script>
 
   <script>
     // adapted from https://www.w3schools.com/howto/howto_js_filter_elements.asp

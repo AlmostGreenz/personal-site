@@ -52,7 +52,7 @@
     </div>
   </div>
   <a href="../../about/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="About"><i class="fa fa-user"></i></a>
-  <a href="https://www.linkedin.com/in/ryan-b-green/" target="_blank" rel="noopener" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+  
   
     <a></a>
   
@@ -63,7 +63,7 @@
 <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
   <br><br>
   <a href="../../about/" class="w3-bar-item w3-button w3-padding-large"><i class="fa fa-user"></i> &nbsp; About</a>
-  <a href="https://www.linkedin.com/in/ryan-b-green/" target="_blank" rel="noopener" class="w3-bar-item w3-button w3-padding-large"><i class="fa fa-linkedin"></i> &nbsp; LinkedIn</a>
+  
 </div>
 
 
@@ -140,8 +140,22 @@
               
   <h6 class="w3-opacity">Quote From the Film of the Hour:</h6>
 
-  <p style="font-size:14px" class="w3-border w3-padding">I'm going to have to science the heck out of this.</p>
-  <span class="w3-right w3-opacity w3-bold">— <b> <i>The Martian</i>, 2015</b></span>
+  <p style="font-size:14px" class="w3-border w3-padding" id="film-quote">So shines a good deed in a weary world.</p>
+  <span class="w3-right w3-opacity w3-bold" id="film-cite">— <b> <i>Willy Wonka & the Chocolate Factory</i>, 1971</b></span>
+  <script src="../../static/js/film-quotes.js"></script>
+  <script>
+    // "Film of the Hour": one film per hour, same for every visitor.
+    // The hour timestamp hashed to an index keeps it deterministic without
+    // repeating the same film in consecutive hours.
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof FILM_QUOTES === "undefined" || !FILM_QUOTES.length) return;
+      var hour = Math.floor(Date.now() / 3600000);
+      var pick = FILM_QUOTES[(hour * 2654435761) % FILM_QUOTES.length];
+      document.getElementById("film-quote").textContent = pick.quote;
+      document.getElementById("film-cite").innerHTML =
+        "— <b><i>" + pick.name + "</i>, " + pick.year + "</b>";
+    });
+  </script>
 
           </div>
 

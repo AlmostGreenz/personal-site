@@ -184,28 +184,19 @@ def main():
             "<a href='/feedback'>Click here if you would like to give feedback!</a>",
             "<a href='/contact'>Click here if you would like to get in touch!</a>",
         )
-        # No contact form on the static site: the nav Contact items and the
-        # sidebar invite link out to LinkedIn instead.
-        linkedin_icon = (
-            '<a href="%(url)s" target="_blank" rel="noopener" '
-            'class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" '
-            'title="LinkedIn"><i class="fa fa-linkedin"></i></a>' % {"url": LINKEDIN_URL}
-        )
+        # No contact form on the static site, and per Ryan's request the LinkedIn
+        # navbar button is gone too: strip both the desktop icon and the mobile
+        # menu entry. (The sidebar "connect on LinkedIn" invite stays.)
         html = html.replace(
             '<a href="/contact" class="w3-bar-item w3-button w3-hide-small '
             'w3-padding-large w3-hover-white" title="Contact">'
             '<i class="fa fa-envelope"></i></a>',
-            linkedin_icon,
-        )
-        linkedin_side = (
-            '<a href="%(url)s" target="_blank" rel="noopener" '
-            'class="w3-bar-item w3-button w3-padding-large">'
-            '<i class="fa fa-linkedin"></i> &nbsp; LinkedIn</a>' % {"url": LINKEDIN_URL}
+            "",
         )
         html = html.replace(
             '<a href="/contact" class="w3-bar-item w3-button w3-padding-large">'
             '<i class="fa fa-envelope"></i> &nbsp; Contact</a>',
-            linkedin_side,
+            "",
         )
         html = html.replace(
             "<a href='/contact'>Click here if you would like to get in touch!</a>",
@@ -311,6 +302,16 @@ def main():
         src = os.path.join(BASE, "assets", sub)
         if os.path.isdir(src):
             shutil.copytree(src, os.path.join(OUT, "static", sub), dirs_exist_ok=True)
+    # Bake every film+quote into a JS file so each page load can pick a new
+    # "Film of the Hour" client-side (the old Wikiquote API is dead, and the
+    # static pages can't rotate it at serve time).
+    film_quotes = [
+        {"name": f["name"], "year": f["year"], "quote": quotes[f["name"]]}
+        for f in films
+        if f["name"] in quotes
+    ]
+    with open(os.path.join(OUT, "static", "js", "film-quotes.js"), "w") as f:
+        f.write("var FILM_QUOTES = " + json.dumps(film_quotes) + ";\n")
     css_path = os.path.join(OUT, "static", "styling", "css", "styles.pure.css")
     with open(css_path) as f:
         css = f.read()
