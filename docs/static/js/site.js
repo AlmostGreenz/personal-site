@@ -11,6 +11,17 @@
     });
   }
 
+  /* ---------- Dark mode toggle (persisted; defaults to OS preference) ---------- */
+  var themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var el = document.documentElement;
+      var next = el.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      el.setAttribute("data-theme", next);
+      try { localStorage.setItem("rbg-theme", next); } catch (e) {}
+    });
+  }
+
   /* ---------- "Film of the Hour": one film per hour, same for every visitor ---------- */
   document.addEventListener("DOMContentLoaded", function () {
     var q = document.getElementById("film-quote");
