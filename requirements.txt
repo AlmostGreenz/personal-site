@@ -2,3 +2,5 @@ jinja2
 markupsafe
 better_profanity
 Pillow
+fonttools
+brotli
