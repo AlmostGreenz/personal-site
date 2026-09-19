@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="/static/visualsaplenty/examples.css">
+
+    <!-- Icons provided by FontAwesome https://fontawesome.com -->
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-a11y="true"></script>
+    <link rel="stylesheet" type="text/css" href="/static/visualsaplenty/styles.css">
+
+    <!-- Code highlighting provided by https://highlightjs.org -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+
+    <title>VisualsAplenty - Examples</title>
+    <script defer src="/static/visualsaplenty/js/VisualsAplenty.js"></script>
+    <script defer src="/static/visualsaplenty/js/examples.js"></script>
+
+</head>
+
+<body>
+<!-- Navbar for the site -->
+<div id="navBar">
+    <!-- Home button -->
+    <a title="Home" id="homeButton" href="/visualsaplenty/"> <i class="fas fa-home fa-lg"></i></a>
+    <!-- Home icon provided by FontAwesome https://fontawesome.com -->
+    <a class="navBarText" href="/visualsaplenty/documentation">Documentation</a>
+
+</div>
+<br><br><br>
+<h1>VisualsAplenty.js Examples</h1>
+<br><br>
+
+<div class="example">
+    <div class="tvTableDiv"></div>
+    <br>
+    <div class="inputOuterDiv inputTest">
+        <br>
+        <h4>Vote for the best TV Show of all time!</h4>
+        <form>
+            <label> Favourite TV Show:<br>
+                <input type="text" maxlength="100">
+                <button onclick="changeBarPieData(event, favTVShow, 'Show')">Vote!</button>
+            </label>
+        </form>
+        <br><br><br>
+        <label class="rangeLabel">
+            Adjust Size<br>
+            <input type="range" min="-80" max="300" value="0" onchange="changeGraphSize(event, favTVShow)">
+        </label>
+    </div>
+    <div class="codeDisplayDiv">
+        <div class="codeDisplay">
+            <p>Graph Setup:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const tvData = [
+    {
+        Show: "LOST",
+        Count: 145,
+        Img: "https://static.wikia.nocookie.net/lostpedia/images/a/ac/Lost-SeasonOneEdited.jpg"
+    },
+    {
+        Show: "Sherlock",
+        Count: 99,
+        Img: "https://resizing.flixster.com/g8lv2hq9wqCD3gudbYa1_tTXAVA=/206x305/v2/https://flxt.tmsimg.com/assets/p8204516_b_v10_ao.jpg"
+    },
+    {
+        Show: "Smallville",
+        Count: 80,
+        Img: "https://m.media-amazon.com/images/I/51oNKuccbGL._AC_.jpg"
+    },
+    {
+        Show: "Hawkeye",
+        Count: 66,
+        Img: "https://lumiere-a.akamaihd.net/v1/images/p_disneyplusoriginals_hawkeye_poster_rebrand_22c56774.png"
+    }
+]
+
+const tvTableDiv = document.querySelector('.tvTableDiv');
+
+const favTVShow = new BarGraph("Favourite TV Show", tvData, "Count", "Show", tvTableDiv);
+favTVShow.setMaxValueHonour(true); // set highest bar(s) as winner
+favTVShow.setImages(null, 'Img'); // set images to be displayed on hover</code></pre>
+            <p>Add Vote:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const dataToAdd = [];
+const userInput = __; // retrieve user input
+let dataAdded = false;
+
+// check if Show entry exists and increment count if so
+for (let element of favTVShow.dataAlias) {
+    if (element['Show'] === value) {
+        element['Count']++;
+        dataAdded = true;
+        break;
+    }
+}
+
+// if show entry does not exist, create new entry with count 1
+if (!dataAdded) {
+    dataToAdd.push({
+        Show: value,
+        Count: 1
+    });
+}
+
+// add data to graph and re-draw
+favTVShow.addData(dataToAdd);</code></pre>
+            <p>Adjust Size:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const val = __; // retrieve user input
+graph.changeTableDimensions(300 + val, 200 + val); // update table
+graph.outerDiv.parentElement.style.width = `${600 + val}px`; // adjust parent div if wanted
+</code></pre>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="example">
+    <div class="numWinLoseDiv"></div>
+    <br>
+    <div class="inputOuterDiv inputTest">
+        <h4>Overwatch Competitive 2021</h4>
+        <form>
+            <label> Your Team's Results:<br>
+                <input type="text" placeholder="Team Name" maxlength="100">
+                <input type="number" placeholder="Number of Wins">
+                <input type="number" placeholder="Number of Losses">
+                <button onclick="changeWinsPlotData(event)">Record</button>
+            </label>
+        </form>
+        <br>
+        <label class="rangeLabel">
+            Adjust Size<br>
+            <input type="range" min="-20" max="300" value="0" onchange="changeGraphSize(event, winLose)">
+        </label>
+        <br>
+        <label class="rangeLabel">
+        Adjust Dot Diameter<br>
+        <input type="range" min="5" max="100" value="20" onchange="changeDotSize(event)">
+    </label>
+        <br>
+    </div>
+    <div class="codeDisplayDiv">
+        <div class="codeDisplay"><!-- Code highlighting provided by https://highlightjs.org -->
+            <p>Graph Setup:</p><pre><code class="language-js">const winLoseData = [
+    {
+        Name: "Wipeout",
+        Wins: 50,
+        Losses: 80
+    },
+    {
+        Name: "Visor",
+        Wins: 30,
+        Losses: 90
+    },
+    {
+        Name: "Freeze",
+        Wins: 5,
+        Losses: 45
+    },
+    {
+        Name: "Bowser",
+        Wins: 15,
+        Losses: 7
+    }
+]
+
+const numWinLoseDiv = document.querySelector('.numWinLoseDiv');
+
+const winLose = new ScatterPlot("Overwatch Win Rate 2021", winLoseData, "Wins", "Losses", numWinLoseDiv, 'Name');
+winLose.setLegendVisibility(true);</code></pre>
+            <p>Add Entry:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const values = [__, __, __]; // retrieve user input
+// add data to Scatter Plot
+winLose.addData([{
+    Name: values[0].value,
+    Wins: values[1].value,
+    Losses: values[2].value
+}]);</code></pre>
+            <p>Adjust Size:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const val = __; // retrieve user input
+graph.changeTableDimensions(300 + val, 200 + val); // update table
+graph.outerDiv.parentElement.style.width = `${600 + val}px`; // adjust parent div if wanted
+</code></pre>
+            <p>Adjust Dot Diameter:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const newSize = __; // retrieve user input
+winLose.updateDotSize(newSize);
+</code></pre>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="example">
+    <div class="pieChartDiv"></div>
+    <br>
+    <div class="inputOuterDiv inputTest">
+        <br>
+        <h4>Birdwatcher's Catalogue</h4>
+        <form>
+            <label> Bird Species Spotted:<br>
+                <input type="text" maxlength="100">
+                <button onclick="changeBarPieData(event, pieChartExample, 'Name')">Record</button>
+            </label>
+        </form>
+        <br><br><br>
+        <label class="rangeLabel">
+            Adjust Size<br>
+            <input type="range" min="-250" max="300" value="0" onchange="changePieSize(event, pieChartExample)">
+        </label>
+    </div>
+    <div class="codeDisplayDiv">
+        <div class="codeDisplay">
+            <p>Graph Setup:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const birdWatchData = [
+    {
+        Count: 50,
+        Name: "Sparrow"
+    },
+    {
+        Count: 30,
+        Name: "Falcon"
+    },
+    {
+        Count: 5,
+        Name: "Eagle"
+    },
+    {
+        Count: 15,
+        Name: "Robin"
+    }
+]
+
+const pieChartDiv = document.querySelector('.pieChartDiv');
+
+const pieChartExample = new PieChart("Bird Watching Data 2021", birdWatchData, "Count", "Name", pieChartDiv);</code></pre>
+            <p>Add Vote:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const dataToAdd = [];
+const userInput = __; // retrieve user input
+let dataAdded = false;
+
+// check if Show entry exists and increment count if so
+for (let element of pieChartExample.dataAlias) {
+    if (element['Name'] === value) {
+        element['Count']++;
+        dataAdded = true;
+        break;
+    }
+}
+
+// if show entry does not exist, create new entry with count 1
+if (!dataAdded) {
+    dataToAdd.push({
+        Name: value,
+        Count: 1
+    });
+}
+
+// add data to graph and re-draw
+pieChartExample.addData(dataToAdd);</code></pre>
+            <p>Adjust Size:</p><!-- Code highlighting provided by https://highlightjs.org -->
+            <pre><code class="language-js">const val = __; // retrieve user input
+graph.changeTableDimensions(300 + val); // update diameter
+graph.outerDiv.parentElement.style.width = `${600 + val}px`; // adjust parent div if wanted
+</code></pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>

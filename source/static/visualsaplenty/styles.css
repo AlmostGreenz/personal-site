@@ -1,0 +1,26 @@
+#navBar {
+    position: absolute;
+    padding: 0.2%;
+    background-color: darkseagreen;
+    user-select: none;
+    border-bottom: 1px olivedrab solid;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 99.6%;
+}
+#navBar > * {
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 130%;
+}
+#homeButton {
+    padding-left: 2px;
+}
+
+.navBarText {
+    float: right;
+    margin-right: 1.25%;
+}
+

@@ -1,0 +1,142 @@
+* {
+    transition: 0.3s;
+}
+
+.tvTableDiv, .numWinLoseDiv, .pieChartDiv {
+    width: 600px;
+    border: 3px black solid;
+    border-radius: 12px;
+    padding-bottom: 10px;
+    margin-left: 5%;
+}
+
+.inputTest {
+    width: 600px;
+    height: 20px;
+    padding-bottom: 10px;
+}
+
+.inputTest > div {
+    height: 20px;
+    border: 3px black solid;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+}
+
+input {
+    width: 60%;
+    border-radius: 15px;
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+button {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 1px #deebf7 solid;
+
+    justify-content: center;
+    opacity: 0.7;
+    transition: 0.3s;
+    text-decoration: none;
+    cursor: pointer;
+
+    font-size: 115%;
+    border-radius: 15px;
+    width: 25%;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+.example {
+    display: flex;
+    flex: max-content;
+    align-items: stretch;
+}
+
+.inputOuterDiv {
+    width: 20%;
+    margin: 0 5px 0 5px;
+    border: 3px black solid;
+    border-radius: 12px;
+    height: auto;
+    padding: 15px;
+}
+
+.rangeLabel {
+    text-align: center;
+    display: block;
+}
+
+/* Range input styling */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 80%;
+    height: 20px;
+    background: white;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+    border-radius: 15px;
+
+}
+
+input[type="range"]:hover {
+    opacity: 1;
+    border-radius: 15px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: darkseagreen;
+    cursor: pointer;
+    border-radius: 15px;
+
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: darkseagreen;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+h1, h4 {
+    text-align: center;
+}
+
+.codeDisplayDiv {
+    width: 450px;
+    border: 3px black solid;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+
+}
+
+.codeDisplay {
+    overflow-y: scroll;
+    max-height: 375px;
+
+}
+
+pre {
+    border: 1px black solid;
+    margin-top: 0;
+}
+
+.codeDisplay > * {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="../../static/visualsaplenty/styles.css" rel="stylesheet" type="text/css">
+    <link href="../../static/visualsaplenty/documentation.css" rel="stylesheet" type="text/css">
+
+    <!-- Icons provided by FontAwesome https://fontawesome.com -->
+    <script data-auto-a11y="true" defer src="../../static/js/fa5-all.js"></script>
+
+    <!-- Code highlighting provided by https://highlightjs.org -->
+    <link href="../../static/css/github.min.css"
+          rel="stylesheet">
+    <script src="../../static/js/highlight.min.js"></script>
+
+    <title>VisualsAplenty - Documentation</title>
+    <script defer src="../../static/visualsaplenty/js/VisualsAplenty.js"></script>
+    <script defer src="../../static/visualsaplenty/js/documentation.js"></script>
+    <!-- Assisted in the data collation for this page by the Node module JSDoc -->
+</head>
+<body>
+<!-- Navbar for the site -->
+<div id="navBar">
+    <!-- Home button -->
+    <a href="../../visualsaplenty/" id="homeButton" title="Home"> <i class="fas fa-home fa-lg"></i></a>
+    <!-- Home icon provided by FontAwesome https://fontawesome.com -->
+    <a class="navBarText" href="../../visualsaplenty/examples/">Examples</a>
+
+</div>
+<br><br><br>
+<h1>VisualsAplenty.js Documentation</h1>
+<br><br>
+<div class="displayDiv">
+    <h2>Getting Started</h2>
+    <p class="gettingStartedMessage">Welcome to the world of VisualsAplenty.js! We'll get you started in a pinch, but
+        first we have to make sure you're good to go.</p>
+
+    <p class="gettingStartedMessage">Please ensure that you have <a href="https://fontawesome.com/">Font Awesome
+        v5.15.4+</a> included in your webpage to make use of VisualsAplenty.js's full functionality.</p>
+
+    <p class="gettingStartedMessage">Now, let's let's walk through how to create instances of the objects that
+        VisualsAplenty.js provides.</p>
+
+    <!-- Code highlighting provided by https://highlightjs.org -->
+    <pre><code class="language-js">
+// in your HTML file, include the tag: &lt;script&gt;defer src="../../path/to/VisualsAplenty.js">&lt;/script&gt;
+
+// sample bar graph
+
+// here is a sample array of objects containing the data to be displayed
+const tvData = [
+    {
+        Show: "LOST",
+        Count: 145
+    },
+    {
+        Show: "Sherlock",
+        Count: 99,
+    }
+]
+
+const tvTableDiv = document.querySelector('.tvTableDiv'); // get the parent element you want the graph to be displayed in
+
+// create the BarGraph instance, resulting in the BarGraph to be drawn within the parent element specified
+const favTVShow = new BarGraph("Favourite TV Show", tvData, "Count", "Show", tvTableDiv);
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+// sample scatter plot
+const winLoseData = [
+    {
+        Name: "Toronto Maple Leafs",
+        Wins: 50,
+        Losses: 80
+    },
+    {
+        Name: "Toronto Raptors",
+        Wins: 30,
+        Losses: 90
+    }
+]
+
+const numWinLoseDiv = document.querySelector('.numWinLoseDiv');
+
+// create the ScatterPlot instance, resulting in the ScatterPlot to be drawn within the parent element specified
+const winLose = new ScatterPlot("Toronto Team 2021 Win Rate", winLoseData, "Wins", "Losses", numWinLoseDiv, 'Name');
+winLose.setLegendVisibility(true); // ScatterPlot by default has no legend, but we can enable it
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+// sample pie chart
+const birdWatchData = [
+    {
+        Count: 50,
+        Name: "Sparrow"
+    },
+    {
+        Count: 30,
+        Name: "Falcon"
+    }
+]
+
+const pieChartDiv = document.querySelector('.pieChartDiv');
+
+// create the PieChart instance, resulting in the PieChart to be drawn within the parent element specified
+const pieChartExample = new PieChart("Bird Watching Data 2021", birdWatchData, "Count", "Name", pieChartDiv);
+    </code></pre>
+
+    <p class="gettingStartedMessage">Now, go out and create!</p>
+
+</div>
+<br><br>
+<div class="displayDiv">
+    <h2>Legend Class</h2>
+    <h4>new Legend<span>(parentElement)</span><span
+    ></span></h4>
+    <div>
+        Constructor function for Legend.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>parentElement</code></td>
+            <td>
+                <span>HTMLElement</span>
+            </td>
+            <td>the parent element for this Legend</td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Methods</h3>
+    <h4><span></span>setVisibility<span
+    >(isVisible)</span><span> &rarr; {boolean}</span></h4>
+    <div>
+        Change whether the legend should be visible.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>isVisible</code></td>
+            <td>
+                <span>boolean</span>
+            </td>
+            <td>optional (otherwise, simply toggle setting) boolean indicating whether
+                display or not
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i>: whether the legend is now visible or not
+    </div>
+    <h4>updateLegend<span>(data, labelProperty, colours, height)</span><span
+    > &rarr; {Array}</span></h4>
+    <div>
+        Delete the legend and redraw it based on the data provided.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>data</code></td>
+            <td>
+                <span>Object</span>
+            </td>
+            <td>the data to be drawn, with elements that have property labelProperty
+            </td>
+        </tr>
+        <tr>
+            <td><code>labelProperty</code></td>
+            <td>
+                <span>string</span>
+            </td>
+            <td>a property in all elements of data</td>
+        </tr>
+        <tr>
+            <td><code>colours</code></td>
+            <td>
+                <span>Array</span>
+            </td>
+            <td>an array of colour code strings</td>
+        </tr>
+        <tr>
+            <td><code>height</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td>the pixel height of the parent element</td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>Array</i> the array of colours for the new legend
+    </div>
+</div>
+<br><br>
+<div class="displayDiv">
+    <h2>BarGraph Class</h2>
+    <h4><span></span>new BarGraph<span>(title, data, vertAxis, horAxis, parentElement)</span><span
+    ></span></h4>
+    <div>
+        Constructor for BarGraph
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>title</code></td>
+            <td>
+                <span>string</span>
+            </td>
+            <td>the title of the graph</td>
+        </tr>
+        <tr>
+            <td><code>data</code></td>
+            <td>
+                <span>object</span>
+            </td>
+            <td>array of objects containing the data to be displayed; data[vertAxis] and
+                data[horAxis] must be numerical
+            </td>
+        </tr>
+        <tr>
+            <td><code>vertAxis</code></td>
+            <td>
+                <span>string</span>
+            </td>
+            <td>string representing the attribute in all elements of data to be represented
+                vertically
+            </td>
+        </tr>
+        <tr>
+            <td><code>horAxis</code></td>
+            <td>
+                <span>string</span>
+            </td>
+            <td>string representing the attribute in all elements of data to be represented
+                horizontally
+            </td>
+        </tr>
+        <tr>
+            <td><code>parentElement</code></td>
+            <td>
+                <span>HTMLElement</span>
+            </td>
+            <td>element that is to be the parent element of the graph</td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Methods</h3>
+    <h4><span></span>addData<span
+    >(dataToAdd)</span><span
+    ></span></h4>
+    <div>
+        Add data provided in dataToAdd to the BarGraph.
+        NOTE: this data will be appended to the data array provided in the constructor.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>dataToAdd</code></td>
+            <td>
+                <span>array</span>
+            </td>
+            <td>an array of objects with keys corresponding to horAxis and verAxis</td>
+        </tr>
+        </tbody>
+    </table>
+    <h4><span></span>changeTableDimensions<span
+    >(width, height)</span><span> &rarr; {boolean}</span></h4>
+    <div>
+        Change the dimensions (in pixels) of the table.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>width</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td>numerical pixel value > 0 or null if current width is to be maintained</td>
+        </tr>
+        <tr>
+            <td><code>height</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td>numerical pixel value > 0 or null if current height is to be maintained</td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether width and/or height were changed successfully
+    </div>
+    <h4><span></span>drawData<span>()</span><span
+    ></span></h4>
+    <div>
+        Draw the bars of the graph based on the data in this.data
+    </div>
+    <h4><span></span>removeData<span
+    >(dataToRemove)</span><span></span></h4>
+    <div>
+        Remove the data specified in dataToRemove from the graph.
+        NOTE: this data will be removed from the data array provided in the constructor.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>dataToRemove</code></td>
+            <td>
+                <span>array</span>
+            </td>
+            <td>an array of objects with keys corresponding to horAxis and verAxis</td>
+        </tr>
+        </tbody>
+    </table>
+    <h4><span></span>setMaxValueHonour<span
+    >(enable)</span><span
+    > &rarr; {boolean}</span></h4>
+    <div>
+        Change whether the bar(s) in the graph with the maximum value should have celebration effects and redraw in
+        accordance.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>enable</code></td>
+            <td>
+                <span>boolean</span>
+            </td>
+            <td>optional (otherwise, simply toggle setting) boolean indicating whether to
+                honour
+                maximum value bar or not
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether the maximum value bar is to be honoured or not
+    </div>
+    <h4><span></span>sortData<span
+    >(state)</span><span
+    > &rarr; {boolean}</span></h4>
+    <div>
+        Sort the data displayed in the BarGraph and re-draw the bars.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>state</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td> 1</td>
+            <td>1 if to be sorted ascending, 0 if no sorting is to occur (or to revert
+                sorting), -1
+                if to be sorted descending
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether the operation was successful
+    </div>
+    <h4><span></span>updateScale<span
+    >()</span><span
+    > &rarr; {number}</span></h4>
+    <div>
+        Update the scale of the graph based on the dataset and tableHeight
+    </div>
+    <h5>Returns:</h5>
+    <div>
+        <i>number</i> maximum value of the data
+    </div>
+</div>
+<br><br>
+<div class="displayDiv">
+    <h2>ScatterPlot Class</h2>
+    <div>
+        <h4><span></span>new ScatterPlot<span
+        >(title, data, vertAxis, horAxis, parentElement, legendKey)</span><span
+        ></span></h4>
+        <div>
+            Constructor for ScatterPlot
+        </div>
+        <h5>Parameters:</h5>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>title</code></td>
+                <td>
+                    <span>string</span>
+                </td>
+                <td>the title of the graph</td>
+            </tr>
+            <tr>
+                <td><code>data</code></td>
+                <td>
+                    <span>object</span>
+                </td>
+                <td>array of objects containing the data to be displayed;
+                    data[vertAxis] and data[horAxis] must be numerical
+                </td>
+            </tr>
+            <tr>
+                <td><code>vertAxis</code></td>
+                <td>
+                    <span>string</span>
+                </td>
+                <td>string representing the attribute in all elements of data to be
+                    represented vertically
+                </td>
+            </tr>
+            <tr>
+                <td><code>horAxis</code></td>
+                <td>
+                    <span>string</span>
+                </td>
+                <td>string representing the attribute in all elements of data to be
+                    represented horizontally
+                </td>
+            </tr>
+            <tr>
+                <td><code>parentElement</code></td>
+                <td>
+                    <span>HTMLElement</span>
+                </td>
+                <td>element that is to be the parent element of the graph</td>
+            </tr>
+            <tr>
+                <td><code>legendKey</code></td>
+                <td>
+                    <span>string</span>
+                </td>
+                <td>optional - string representing the attribute in all elements of
+                    data describing context
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h3>Methods</h3>
+    <h4><span></span>changeTableDimensions<span
+    >(width, height)</span><span> &rarr; {boolean}</span></h4>
+    <div>
+        Change the dimensions (in pixels) of the table.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>width</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td>numerical pixel value > 0 or null if current width is to be
+                maintained
+            </td>
+        </tr>
+        <tr>
+            <td><code>height</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td>numerical pixel value > 0 or null if current height is to be
+                maintained
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether width and/or height were changed successfully
+    </div>
+    <h4><span></span>drawData<span>()</span><span
+    ></span></h4>
+    <div>
+        Draw the data (dots) to the graph and update scale.
+    </div>
+    <h4><span></span>updateDotSize<span
+    >(newSize)</span><span> &rarr; {boolean}</span></h4>
+    <div>
+        Change the size of the data dots in the ScatterPlot.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>newSize</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td>the size (> 0) in pixels to change the dot size to</td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether the input was valid and change was successful
+    </div>
+    <h4><span></span>updateScale<span
+    >()</span><span></span></h4>
+    <div>
+        Re-process the scales and display the new version.
+    </div>
+</div>
+<br><br>
+<div class="displayDiv">
+    <h2>PieChart Class</h2>
+    <div>
+        <h4><span></span>new PieChart<span>(title, data, valueKey, labelKey, parentElement)</span><span
+        ></span></h4>
+        <div>
+            Constructor for PieChart.
+        </div>
+        <h5>Parameters:</h5>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>title</code></td>
+                <td>
+                    <span>string</span>
+                </td>
+                <td>the title of the pie chart</td>
+            </tr>
+            <tr>
+                <td><code>data</code></td>
+                <td>
+                    <span>object</span>
+                </td>
+                <td>array of objects containing the data to be displayed;
+                    data[valueKey] must contain the numerical data and data[labelKey] a corresponding string
+                </td>
+            </tr>
+            <tr>
+                <td><code>valueKey</code></td>
+                <td>
+                    <span>string</span>
+                </td>
+                <td>string representing the attribute in all elements of data</td>
+            </tr>
+            <tr>
+                <td><code>labelKey</code></td>
+                <td>
+                    <span>string</span>
+                </td>
+                <td>string representing the attribute in all elements of data</td>
+            </tr>
+            <tr>
+                <td><code>parentElement</code></td>
+                <td>
+                    <span>HTMLElement</span>
+                </td>
+                <td>element that is to be the parent element of the graph</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h3>Methods</h3>
+    <h4><span></span>addData<span
+    >(dataToAdd)</span><span></span></h4>
+    <div>
+        Add data provided in dataToAdd to the graph.
+        NOTE: this data will be appended to the data array provided in the constructor.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>dataToAdd</code></td>
+            <td>
+                <span>array</span>
+            </td>
+            <td>an array of objects with keys corresponding to horAxis and verAxis</td>
+        </tr>
+        </tbody>
+    </table>
+    <h4><span></span>changeTableDimensions<span
+    >(diameter)</span><span> &rarr; {boolean}</span></h4>
+    <div>
+        Change the dimensions (in pixels) of the PieChart.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>diameter</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td>numerical pixel value > 0</td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether diameter was changed successfully and PieChart re-drawn
+    </div>
+    <h4><span></span>clearColours<span>()</span><span
+    ></span></h4>
+    <div>
+        Clear any custom colours for PieChart that have been set and re-draw pie slices if there have been
+        colours set.
+    </div>
+    <h4><span></span>drawData<span>()</span><span
+    ></span></h4>
+    <div>
+        Draw the data (a.k.a. pie slices) to the graph alongside (if enabled) an updated legend.
+    </div>
+    <h4><span></span>removeData<span>(dataToRemove)</span><span
+    ></span></h4>
+    <div>
+        Remove the data specified in dataToRemove from the PieChart.
+        NOTE: this data will be removed from the data array provided in the constructor.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>dataToRemove</code></td>
+            <td>
+                <span>array</span>
+            </td>
+            <td>an array of objects with keys corresponding to horAxis and verAxis</td>
+        </tr>
+        </tbody>
+    </table>
+    <h4><span></span>setColours<span
+    >(colours)</span><span
+    > &rarr; {boolean}</span></h4>
+    <div>
+        Set the colours of the pie slices to values of the array of colour value strings.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>colours</code></td>
+            <td></td>
+            <td>array with length <i>this.data.length</i> containing colour value strings
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether the colour change was successful
+    </div>
+    <h4><span></span>setLegendVisibility<span
+    >(isVisible)</span><span> &rarr; {boolean}</span></h4>
+    <div>
+        Change whether the legend should be visible.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>isVisible</code></td>
+            <td>
+                <span>boolean</span>
+            </td>
+            <td>optional (otherwise, simply toggle setting) boolean indicating whether
+                display or not
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether the legend is now visible or not
+    </div>
+    <h4><span></span>sortData<span
+    >(state)</span><span> &rarr; {boolean}</span></h4>
+    <div>
+        Sort the data displayed in the PieChart and re-draw the pie slices.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>state</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td> 1</td>
+            <td>1 if to be sorted ascending clockwise, 0 if no sorting is to occur (or
+                to revert sorting), -1 if to be sorted descending clockwise
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>boolean</i> whether the operation was successful
+    </div>
+    <h4><span></span>updateLegend<span>()</span><span
+    ></span></h4>
+    <div>
+        Update and draw the legend according to the dataset
+        Note: Pie Slice colours are not updated (unless drawData has been called)
+    </div>
+</div>
+<br><br>
+<div class="displayDiv">
+    <h2>generateColours(num) Function</h2>
+    <h4><span></span>generateColours<span
+    >(num)</span><span> &rarr; {array}</span></h4>
+    <div>
+        Generate an array of length num of colour values 'rgb(r,g,b)' as strings.
+        For all colour values to be unique, num <= 768.
+    </div>
+    <h5>Parameters:</h5>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><code>num</code></td>
+            <td>
+                <span>number</span>
+            </td>
+            <td>the integer number of colours to be returned</td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Returns:</h5>
+    <div>
+        <i>array</i> colours array of length num of strings with colour values
+    </div>
+</div>
+<br><br></body>
+</html>

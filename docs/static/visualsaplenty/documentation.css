@@ -1,0 +1,40 @@
+h1, h2 {
+    text-align: center;
+}
+
+.displayDiv {
+    position: relative;
+    width: 70%;
+    left: 15%;
+    border: 3px black solid;
+    border-radius: 12px;
+    padding: 3%;
+}
+
+.gettingStartedMessage {
+    font-size: larger;
+}
+
+pre {
+    border: 1px black solid;
+    margin-top: 0;
+}
+
+table {
+    width: 50%;
+}
+
+table, thead, tbody, th, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 1%;
+}
+
+table, thead, tbody {
+    width: 100%;
+    font-size: 90%;
+}
+
+td {
+    padding: 2%;
+}

@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}
+        - About
+{% endblock %}
+
+{% block body %}
+  <h6 class="w3-opacity">Quote From the Film of the Hour:</h6>
+
+  <p style="font-size:14px" class="w3-border w3-padding">{{ quote }}</p>
+  <span class="w3-right w3-opacity w3-bold">— <b> <i>{{ film }}</i>, {{ year }}</b></span>
+{% endblock %}
+
+{% block middle %}
+   <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+     <img src="/static/images/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+     <h4 style="padding-top: 15px">Ryan B. Green</h4>
+     <br>
+     <hr class="w3-clear">
+      <div class="w3-container">
+        {% if choice == 'start'%}
+          <h6>Hello!</h6>
+          <p>I'm Ryan, and thank you for checking out my website.</p>
+          <p>I guess I have to write about myself now, seeing as this is the 'about' section.</p>
+          <p>Hmm...what should I write...</p>
+          <p><b>I know what to do! I'll let you decide!</b></p>
+
+          <p><b>Would you rather see:</b></p>
+          <a href="/about?choice=doing" class="w3-button w3-theme-d1 w3-margin-bottom" style="text-decoration: none;"><i class="fa fa-lightbulb-o fa-lg"></i>&emsp;What I'm Doing</a>
+          <a href="/about?choice=like" class="w3-button w3-theme-d1 w3-margin-bottom" style="text-decoration: none;"><i class="fa fa-thumbs-up fa-lg"></i>&emsp;What I Like</a>
+          <a href="/about?choice=going" class="w3-button w3-theme-d1 w3-margin-bottom" style="text-decoration: none;"><i class="fa fa-space-shuttle fa-lg"></i>&emsp;Where I'm Going</a>
+        {% else %}
+          {% if choice == 'doing' %}
+            <h6>What I'm Doing:</h6>
+            <p>Right now, I am about to finish my final year at the University of Toronto, pursuing a Computer Science Specialist degree.</p>
+            <p>I recently completed my university's PEY/Co-op 16-month term as an intern at Intel on the Post-Silicon SerDes Team.</p>
+            <p>As well, I completed Harvard's CS50x via edX in the summer of 2020 (where I learned how to make this page you are looking at <b>right now</b>...that alone is kind of cool).</p>
+            <p>But that's not all I do...</p>
+            <p><b>Check out the other options by clicking the button below:</b></p>
+
+          {% elif choice == 'like' %}
+            <h6>What I Like:</h6>
+            <p>When I'm not working on an assignment or personal project, I have many interests, including but not limited to: reading, watching television and films, and gaming.</p>
+            <p>Some of my favourite novels are:</p>
+            <ul>
+              <li>Ready Player One by Ernest Cline</li>
+              <li>The War of the Worlds by H.G. Wells</li>
+              <li>Dune by Frank Herbert</li>
+              <li>Kenobi by John Jackson Miller</li>
+              <li>The Sherlock Holmes stories by Sir Arthur Conan Doyle</li>
+            </ul>
+            <p>Some of my favourite films/film series are:</p>
+            <ul>
+              <li>The Back to the Future Trilogy</li>
+              <li>The Marvel Cinematic Universe</li>
+              <li>Ferris Bueller's Day Off</li>
+              <li>Ghostbusters</li>
+              <li>Star Wars (Episodes I-IX as well as Solo and Rogue One)</li>
+              <li>The Harry Potter and Fantastic Beasts Series</li>
+            </ul>
+            <p>Some of my favourite television series are:</p>
+            <ul>
+              <li>LOST</li>
+              <li>Prison Break</li>
+              <li>Smallville</li>
+              <li>Sherlock</li>
+              <li>The Flash</li>
+              <li>Arrow</li>
+              <li>Legends of Tomorrow</li>
+              <li>The Last of Us</li>
+              <li>The Umbrella Academy</li>
+            </ul>
+            <p>Finally, some of my favourite video games are:</p>
+            <ul>
+              <li>Team Fortress 2</li>
+              <li>The Fallout Series</li>
+              <li>Overwatch</li>
+              <li>The Tomb Raider Reboot Series</li>
+            </ul>
+            <p>But that's not my whole life encapsulated!</p>
+            <p><b>Check out the other options by clicking the button below:</b></p>
+
+          {% else %}
+            <h6>Where I'm Going:</h6>
+            <p>Back.</p>
+            <p>Back where, you may ask...</p>
+            <h3>BACK TO THE FUTURE</h3>
+            <p>...sorry about that. I couldn't resist.</p>
+            <br>
+            <p>To be honest, I'm not sure where I'm headed. I guess we will both have to stay tuned to find out!</p>
+            <p><b>Check out the other options by clicking the button below:</b></p>
+
+          {% endif %}
+          <a href="/about" class="w3-button w3-theme-d1 w3-margin-bottom" style="float: right; text-decoration: none;"><i class="fa fa-mail-reply fa-lg"></i>&emsp;Return</a>
+        {% endif %}
+      </div>
+    </div>
+
+
+{% endblock %}
+
