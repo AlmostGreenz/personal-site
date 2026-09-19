@@ -62,3 +62,30 @@ colours) lives at the top of `build.py`.
 
 Note: `build.py`, `data/`, etc. are publicly readable in the repo, which is
 fine — it's all public blog content anyway.
+
+## Custom domain (ryanbgreen.ca)
+
+The build already prepares everything for the custom domain:
+
+- `docs/CNAME` is generated from the repo-root `CNAME` file (currently
+  `www.ryanbgreen.ca`) — GitHub Pages picks it up automatically.
+- `SITE_URL` in `build.py` is the canonical URL used for share links.
+
+DNS setup (in Cloudflare's DNS panel — not the registrar):
+
+- `www` → CNAME → `AlmostGreenz.github.io`
+- apex (`@`) → A records → `185.199.108.153`, `185.199.109.153`,
+  `185.199.110.153`, `185.199.111.153` (GitHub redirects apex → www)
+
+Keep both records **DNS only (gray cloud), not proxied**: GitHub Pages
+provisions and auto-renews the HTTPS certificate itself, and the orange
+cloud breaks its renewal checks (the site works until the cert expires,
+then HTTPS silently breaks). With DNS-only records, Cloudflare is purely
+your DNS provider and GitHub handles HTTPS end to end. Nothing to change
+at WHC as long as the nameservers already point at Cloudflare.
+
+Then: repo Settings → Pages → Custom domain → `www.ryanbgreen.ca`,
+wait for the certificate (~15 min), and tick Enforce HTTPS.
+
+To make the apex canonical instead, change the repo-root `CNAME` and
+`SITE_URL` to the bare domain and rebuild.

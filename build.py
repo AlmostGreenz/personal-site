@@ -20,7 +20,7 @@ from markupsafe import Markup
 from better_profanity import profanity
 
 # ---------------------------------------------------------------- config ---
-SITE_URL = "https://almostgreenz.github.io/personal-site/"   # canonical URL of the Pages site
+SITE_URL = "https://www.ryanbgreen.ca/"   # canonical URL of the Pages site
 # Outbound contact link (no contact form on the static site).
 LINKEDIN_URL = "https://www.linkedin.com/in/ryan-b-green/"
 # The featured film quote is fixed: one quote baked in at build time, never
@@ -337,6 +337,10 @@ def main():
             shutil.copy2(src, os.path.join(OUT, name))
     # Tell GitHub Pages to skip Jekyll processing
     open(os.path.join(OUT, ".nojekyll"), "w").close()
+    # Custom domain: GitHub Pages reads the CNAME from the publish root.
+    cname_src = os.path.join(BASE, "CNAME")
+    if os.path.exists(cname_src):
+        shutil.copy2(cname_src, os.path.join(OUT, "CNAME"))
 
     n_files = sum(len(fs) for _, _, fs in os.walk(OUT))
     print("\ndone: %d files in %s" % (n_files, OUT))
