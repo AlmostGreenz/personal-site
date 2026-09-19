@@ -181,6 +181,10 @@
     thumbs.forEach(function (t) {
       t.addEventListener("click", function () {
         lead.src = t.getAttribute("data-full");
+        /* The lead sits inside a <picture> with a WebP <source>: keep the
+           source in sync or the swap silently keeps showing the old image. */
+        var src = gal.querySelector("source");
+        if (src && t.getAttribute("data-full-webp")) src.srcset = t.getAttribute("data-full-webp");
         thumbs.forEach(function (o) { o.classList.remove("active"); });
         t.classList.add("active");
         lead.addEventListener("load", checkFit, { once: true });

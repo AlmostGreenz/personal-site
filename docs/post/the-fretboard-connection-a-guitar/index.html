@@ -10,6 +10,8 @@
 (function(){try{var t=localStorage.getItem('rbg-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches){t='dark';}document.documentElement.setAttribute('data-theme',t||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="In May/June 2017, after experimenting with Processing.py through GreenBot , I finally made my first proper game. What I dubbed 'The Fretboard Connection' is...">
+<link rel="preload" href="../../static/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../static/styling/css/bold.css">
 <link rel="apple-touch-icon" sizes="180x180" href="../../static/apple-touch-icon.png?v=3">
 <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicon-32x32.png?v=3">
@@ -98,18 +100,19 @@
 
 
 <div class="post-full" style="--accent: var(--b);">
-  <div class="post-date" style="color: var(--b);">Aug 13, 2020</div>
+  <div class="post-date" style="color: var(--b-text);">Aug 13, 2020</div>
   <h2>The Fretboard Connection ‒ A Guitar Hero-esque Rhythm Game</h2>
   <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag g">Games</span></div>
   
-  <a class="video-link" data-vimeo-id="448623042" href="https://vimeo.com/448623042" target="_blank" rel="noopener"><img src="../../static/images/video-thumbs/448623042.jpg" alt="The Fretboard Connection ‒ A Guitar Hero-esque Rhythm Game demo video"><span class="video-play"><i class="fa fa-play"></i></span></a>
+  <a class="video-link" data-vimeo-id="448623042" href="https://vimeo.com/448623042" target="_blank" rel="noopener"><picture><source srcset="../../static/images/video-thumbs/448623042.webp" type="image/webp"><img src="../../static/images/video-thumbs/448623042.jpg" alt="The Fretboard Connection ‒ A Guitar Hero-esque Rhythm Game demo video" width="1280" height="720" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
+  
   
   
   <div class="gallery">
-    <img class="gallery-lead" src="../../static/images/fretboardmenu.png" alt="Post image">
+    <picture><source srcset="../../static/images/fretboardmenu.webp" type="image/webp"><img class="gallery-lead" src="../../static/images/fretboardmenu.png" alt="Post image" width="800" height="600" decoding="async"></picture>
     
     <div class="gallery-thumbs">
-      <img src="../../static/images/fretboardmenu.png" data-full="../../static/images/fretboardmenu.png" alt="Thumbnail 1" class="active"><img src="../../static/images/fretboardgameplay.png" data-full="../../static/images/fretboardgameplay.png" alt="Thumbnail 2" class="">
+      <img src="../../static/images/thumbs/fretboardmenu.webp" data-full="../../static/images/fretboardmenu.png" data-full-webp="../../static/images/fretboardmenu.webp" alt="Thumbnail 1" width="152" height="114" loading="lazy" decoding="async" class="active"><img src="../../static/images/thumbs/fretboardgameplay.webp" data-full="../../static/images/fretboardgameplay.png" data-full-webp="../../static/images/fretboardgameplay.webp" alt="Thumbnail 2" width="152" height="114" loading="lazy" decoding="async" class="">
     </div>
     
   </div>
@@ -124,7 +127,7 @@
   <aside>
     <div class="side-card">
       <h3><i class="fa fa-calendar"></i> Upcoming event</h3>
-      <img src="../../static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img">
+      <picture><source srcset="../../static/images/sunglassesAvatar.webp" type="image/webp"><img src="../../static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img" width="735" height="541"></picture>
       <div id="event-box">
         
           <div class="big">Halloween</div>

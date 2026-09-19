@@ -8,6 +8,8 @@
 (function(){try{var t=localStorage.getItem('rbg-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches){t='dark';}document.documentElement.setAttribute('data-theme',t||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{% block metadesc %}R.B.G. — the personal site of Ryan B. Green, SDE at AWS. Past projects, games, and information.{% endblock %}">
+<link rel="preload" href="/static/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/static/styling/css/bold.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png?v=3">
 <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png?v=3">
@@ -58,7 +60,7 @@
   <aside>
     <div class="side-card">
       <h3><i class="fa fa-calendar"></i> Upcoming event</h3>
-      <img src="/static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img">
+      <picture><source srcset="/static/images/sunglassesAvatar.webp" type="image/webp"><img src="/static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img" width="735" height="541"></picture>
       <div id="event-box">
         {% if event %}
           <div class="big">{{ event['name'] }}</div>

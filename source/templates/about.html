@@ -6,6 +6,8 @@
 
 {% block pageclass %} page-about{% endblock %}
 
+{% block metadesc %}About Ryan B. Green — Software Development Engineer at AWS in Vancouver, U of T computer science grad. What he's doing, what he's into, and where he's headed.{% endblock %}
+
 {% block content %}
 <div class="quote-block">
   <div class="quote-label"><i class="fa fa-film"></i> Film of the hour</div>
@@ -15,7 +17,7 @@
 
 <div class="about-card">
   <div class="about-head">
-    <img src="/static/images/avatar.png" alt="Avatar">
+    <img src="/static/images/avatar.png" alt="Avatar" width="128" height="128">
     <h4>Ryan B. Green</h4>
   </div>
   {% if choice == 'start' %}

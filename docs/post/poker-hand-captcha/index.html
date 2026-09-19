@@ -10,6 +10,8 @@
 (function(){try{var t=localStorage.getItem('rbg-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches){t='dark';}document.documentElement.setAttribute('data-theme',t||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Since the summer of 2023, I have been involved in the University of Toronto Computer Poker Student Research Group (U of T CPRG) led by Juho Kim under the...">
+<link rel="preload" href="../../static/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../static/styling/css/bold.css">
 <link rel="apple-touch-icon" sizes="180x180" href="../../static/apple-touch-icon.png?v=3">
 <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicon-32x32.png?v=3">
@@ -98,11 +100,11 @@
 
 
 <div class="post-full" style="--accent: var(--b);">
-  <div class="post-date" style="color: var(--b);">Mar 31, 2024</div>
+  <div class="post-date" style="color: var(--b-text);">Mar 31, 2024</div>
   <h2>Poker Hand CAPTCHA</h2>
   <div class="tagrow"><span class="tag b">Python</span><span class="tag r">Software</span><span class="tag o">Misc.</span></div>
   
-  <a class="video-link" data-vimeo-id="937970295" href="https://vimeo.com/937970295" target="_blank" rel="noopener"><img src="../../static/images/video-thumbs/937970295.jpg" alt="Poker Hand CAPTCHA demo video"><span class="video-play"><i class="fa fa-play"></i></span></a>
+  <a class="video-link" data-vimeo-id="937970295" href="https://vimeo.com/937970295" target="_blank" rel="noopener"><picture><source srcset="../../static/images/video-thumbs/937970295.webp" type="image/webp"><img src="../../static/images/video-thumbs/937970295.jpg" alt="Poker Hand CAPTCHA demo video" width="1280" height="720" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
   
   
   <div class="body-text">Since the summer of 2023, I have been involved in the <a target="_blank" href="https://uoftcprg.com/" rel="noreferrer noopener">University of Toronto Computer Poker Student Research Group</a> (U of T CPRG) led by Juho Kim under the advisement of Dr. Michael Stumm. I am happy to share the project I have recently completed as part of this group: a CAPTCHA challenge based around poker hands. <br><br>This project was implemented using Django, making use of Juho Kim’s <i>Pokerkit</i> Python library to generate and validate poker hands. A random hand type will be generated and requested from the user, who must drag and drop a proper set of five cards to form that type of hand. Please see the video embedded below for an example of a successful and a failed Poker Hand CAPTCHA validation.<br><br>The repository for this project remains project for the moment, but we hope to soon make it available to the public. In the meantime, you may visit the main GitHub page for the U of T CPRG:<br><br><a target="_blank" href="https://github.com/uoftcprg" rel="noreferrer noopener" class="w3-button w3-theme-d2 w3-margin-bottom" style="text-decoration: none;"><i class="fa fa-github fa-lg"></i> Go to GitHub Page </a></div>
@@ -115,7 +117,7 @@
   <aside>
     <div class="side-card">
       <h3><i class="fa fa-calendar"></i> Upcoming event</h3>
-      <img src="../../static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img">
+      <picture><source srcset="../../static/images/sunglassesAvatar.webp" type="image/webp"><img src="../../static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img" width="735" height="541"></picture>
       <div id="event-box">
         
           <div class="big">Halloween</div>

@@ -98,6 +98,91 @@ def load(name):
         return json.load(f) or []
 
 
+def image_dimensions(img_names):
+    """Intrinsic (w, h) for every image the templates reference, keyed by
+    filename (video posters keyed as 'video-thumbs/<file>'). Also returns
+    thumbnail dims (152px wide, aspect preserved) for gallery images.
+    Needs Pillow; returns empty dicts without it (templates then omit
+    width/height rather than guessing)."""
+    dims, thumbs = {}, {}
+    try:
+        from PIL import Image
+    except ImportError:
+        return dims, thumbs
+    fixed = {"sunglassesAvatar.png", "avatar.png", "LOST.jpg"}
+    jobs = [(os.path.join(STATIC_DIR, "images", n), n) for n in set(img_names) | fixed]
+    vt = os.path.join(STATIC_DIR, "images", "video-thumbs")
+    if os.path.isdir(vt):
+        jobs += [
+            (os.path.join(vt, n), "video-thumbs/" + n)
+            for n in sorted(os.listdir(vt))
+            if n.lower().endswith((".jpg", ".jpeg", ".png"))
+        ]
+    for path, key in jobs:
+        try:
+            with Image.open(path) as im:
+                w, h = im.size
+        except Exception:
+            continue
+        dims[key] = (w, h)
+        if key in img_names:
+            thumbs[key] = (152, max(1, round(152 * h / w)))
+    return dims, thumbs
+
+
+def build_image_derivatives(img_names):
+    """Generate local WebP derivatives + small gallery thumbnails into docs/.
+
+    Templates reference these through <picture>, with the original file as
+    the <img> fallback -- so a build without Pillow still yields a working
+    site. Everything stays vendored: no CDN, no remote processing.
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        print("Pillow not available: skipping WebP derivatives")
+        return
+
+    def save_webp(src, dest, max_w=None, quality=85):
+        try:
+            with Image.open(src) as im:
+                if max_w and im.size[0] > max_w:
+                    im = im.copy()
+                    im.thumbnail((max_w, max_w * 4), Image.LANCZOS)
+                im.save(dest, "WEBP", quality=quality)
+            return True
+        except Exception as e:
+            print("webp skip %s: %s" % (src, e))
+            return False
+
+    made = 0
+    img_dir = os.path.join(STATIC_DIR, "images")
+    out_dir = os.path.join(OUT, "static", "images")
+    thumb_dir = os.path.join(out_dir, "thumbs")
+    os.makedirs(thumb_dir, exist_ok=True)
+    for fn in sorted(set(img_names) | {"sunglassesAvatar.png"}):
+        base = fn.rsplit(".", 1)[0]
+        if save_webp(os.path.join(img_dir, fn), os.path.join(out_dir, base + ".webp")):
+            made += 1
+        if save_webp(
+            os.path.join(img_dir, fn),
+            os.path.join(thumb_dir, base + ".webp"),
+            max_w=152,
+            quality=75,
+        ):
+            made += 1
+    vt, vt_out = os.path.join(img_dir, "video-thumbs"), os.path.join(out_dir, "video-thumbs")
+    if os.path.isdir(vt):
+        for fn in sorted(os.listdir(vt)):
+            if fn.lower().endswith((".jpg", ".jpeg", ".png")) and save_webp(
+                os.path.join(vt, fn),
+                os.path.join(vt_out, fn.rsplit(".", 1)[0] + ".webp"),
+                quality=80,
+            ):
+                made += 1
+    print("image derivatives: %d webp files" % made)
+
+
 def get_event(events):
     """Mirror application.py's get_event(): the next upcoming event, or None
     when there are no upcoming events. Supports one-time events
@@ -189,6 +274,12 @@ def process_post(raw):
     else:
         post["cutoff"] = False
     post["content"] = Markup(content)
+    # Plain-text meta description for <meta name="description"> (~160 chars).
+    src = post.get("short") if post.get("cutoff") else content
+    plain = " ".join(re.sub(r"<[^>]+>", " ", str(src)).split())
+    if len(plain) > 160:
+        plain = plain[:157].rsplit(" ", 1)[0] + "..."
+    post["meta_desc"] = plain or post["title"]
     return post
 
 
@@ -213,6 +304,12 @@ def main():
     film = next((f for f in films if f["name"] == FEATURED_FILM_NAME), films[0])
     quote = profanity.censor(quotes.get(film["name"], ""))
 
+    # Intrinsic image dimensions + thumbnail sizes for the templates, so
+    # every <img> ships width/height (no layout shift) and the gallery
+    # thumb strip uses small generated thumbnails instead of full-size files.
+    img_names = sorted({img for p in posts for img in p["images"]})
+    img_dims, thumb_dims = image_dimensions(img_names)
+
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
@@ -229,6 +326,8 @@ def main():
             "quote": quote,
             "film": film["name"],
             "year": film["year"],
+            "img_dims": img_dims,
+            "thumb_dims": thumb_dims,
             "request": FakeRequest(path, SITE_URL + path),
         }
 
@@ -306,7 +405,8 @@ def main():
 
     # -- static assets ------------------------------------------------------
     shutil.copytree(STATIC_DIR, os.path.join(OUT, "static"))
-    # Vendor the Font Awesome webfonts locally and point the CSS at them.
+    # Local WebP derivatives + small gallery thumbnails (see function above).
+    build_image_derivatives(img_names)    # Vendor the Font Awesome webfonts locally and point the CSS at them.
     # The original CSS pulled them from a CDN, which broke icons whenever the
     # CDN was unreachable (and adds a runtime dependency the static site
     # shouldn't have). Relative URLs keep them working from file:// too.

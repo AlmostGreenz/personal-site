@@ -4,11 +4,13 @@
         - Error {{ code }}
 {% endblock %}
 
+{% block metadesc %}Page not found — head back to Ryan B. Green's homepage for projects, builds, and film picks.{% endblock %}
+
 {% block content %}
 <div class="err-card">
   <h1><span class="r">4</span><span class="b">0</span><span class="g">4</span></h1>
   <p>It looks like you are:</p>
-  <img src="/static/images/LOST.jpg" alt="You Are LOST" style="width: 100%; height: auto; border-radius: 14px; margin: 12px 0;">
+  <img src="/static/images/LOST.jpg" alt="You Are LOST" width="800" height="600" style="width: 100%; height: auto; border-radius: 14px; margin: 12px 0;" loading="lazy" decoding="async">
   <p><a href="/" class="btn-return" style="float:none;"><i class="fa fa-mail-reply fa-lg"></i> Return to Home</a></p>
 </div>
 {% endblock %}

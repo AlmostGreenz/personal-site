@@ -4,6 +4,8 @@
         - {{ post['title'] }}
 {% endblock %}
 
+{% block metadesc %}{{ post['meta_desc'] }}{% endblock %}
+
 {% block content %}
 <div class="quote-block">
   <div class="quote-label"><i class="fa fa-film"></i> Film of the hour</div>
@@ -13,18 +15,19 @@
 
 {% set tagc = {'Software': 'r', 'Python': 'b', 'Games': 'g', 'Arduino': 'v', 'Misc.': 'o'} %}
 <div class="post-full" style="--accent: var(--{{ tagc[post['tags'][0]] if post['tags'] else 'r' }});">
-  <div class="post-date" style="color: var(--{{ tagc[post['tags'][0]] if post['tags'] else 'r' }});">{{ post['posted_display'] }}</div>
+  <div class="post-date" style="color: var(--{{ tagc[post['tags'][0]] if post['tags'] else 'r' }}-text);">{{ post['posted_display'] }}</div>
   <h2>{{ post['title'] }}</h2>
   <div class="tagrow">{% for tag in post['tags'][:-1] %}<span class="tag {{ tagc[tag] }}">{{ tag }}</span>{% endfor %}</div>
   {% if post['video'] %}
-  <a class="video-link" data-vimeo-id="{{ post['video_id'] }}" href="https://vimeo.com/{{ post['video_id'] }}" target="_blank" rel="noopener"><img src="/static/images/video-thumbs/{{ post['video_id'] }}.jpg" alt="{{ post['title'] }} demo video"><span class="video-play"><i class="fa fa-play"></i></span></a>
+  <a class="video-link" data-vimeo-id="{{ post['video_id'] }}" href="https://vimeo.com/{{ post['video_id'] }}" target="_blank" rel="noopener"><picture><source srcset="/static/images/video-thumbs/{{ post['video_id'] }}.webp" type="image/webp"><img src="/static/images/video-thumbs/{{ post['video_id'] }}.jpg" alt="{{ post['title'] }} demo video" width="1280" height="720" decoding="async"></picture><span class="video-play"><i class="fa fa-play"></i></span></a>
   {% endif %}
   {% if post['images'] %}
+  {% set lead = post['images'][0] %}
   <div class="gallery">
-    <img class="gallery-lead" src="/static/images/{{ post['images'][0] }}" alt="Post image">
+    <picture><source srcset="/static/images/{{ lead.rsplit('.', 1)[0] }}.webp" type="image/webp"><img class="gallery-lead" src="/static/images/{{ lead }}" alt="Post image" width="{{ img_dims[lead][0] }}" height="{{ img_dims[lead][1] }}" decoding="async"></picture>
     {% if post['images']|length > 1 %}
     <div class="gallery-thumbs">
-      {% for img in post['images'] %}<img src="/static/images/{{ img }}" data-full="/static/images/{{ img }}" alt="Thumbnail {{ loop.index }}" class="{% if loop.first %}active{% endif %}">{% endfor %}
+      {% for img in post['images'] %}<img src="/static/images/thumbs/{{ img.rsplit('.', 1)[0] }}.webp" data-full="/static/images/{{ img }}" data-full-webp="/static/images/{{ img.rsplit('.', 1)[0] }}.webp" alt="Thumbnail {{ loop.index }}" width="{{ thumb_dims[img][0] }}" height="{{ thumb_dims[img][1] }}" loading="lazy" decoding="async" class="{% if loop.first %}active{% endif %}">{% endfor %}
     </div>
     {% endif %}
   </div>

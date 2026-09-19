@@ -10,6 +10,8 @@
 (function(){try{var t=localStorage.getItem('rbg-theme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches){t='dark';}document.documentElement.setAttribute('data-theme',t||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="In 2018, I returned back to working with Arduino boards. For my second proper project, I made a recreation of KITT's scanner lights from the '80s show...">
+<link rel="preload" href="../../static/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../static/styling/css/bold.css">
 <link rel="apple-touch-icon" sizes="180x180" href="../../static/apple-touch-icon.png?v=3">
 <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicon-32x32.png?v=3">
@@ -98,16 +100,17 @@
 
 
 <div class="post-full" style="--accent: var(--v);">
-  <div class="post-date" style="color: var(--v);">Aug 17, 2020</div>
+  <div class="post-date" style="color: var(--v-text);">Aug 17, 2020</div>
   <h2>Knight Rider: KITT Scanner Lights</h2>
   <div class="tagrow"><span class="tag v">Arduino</span></div>
   
   
+  
   <div class="gallery">
-    <img class="gallery-lead" src="../../static/images/kittSchem.jpg" alt="Post image">
+    <picture><source srcset="../../static/images/kittSchem.webp" type="image/webp"><img class="gallery-lead" src="../../static/images/kittSchem.jpg" alt="Post image" width="720" height="540" decoding="async"></picture>
     
     <div class="gallery-thumbs">
-      <img src="../../static/images/kittSchem.jpg" data-full="../../static/images/kittSchem.jpg" alt="Thumbnail 1" class="active"><img src="../../static/images/kittIRL.jpg" data-full="../../static/images/kittIRL.jpg" alt="Thumbnail 2" class="">
+      <img src="../../static/images/thumbs/kittSchem.webp" data-full="../../static/images/kittSchem.jpg" data-full-webp="../../static/images/kittSchem.webp" alt="Thumbnail 1" width="152" height="114" loading="lazy" decoding="async" class="active"><img src="../../static/images/thumbs/kittIRL.webp" data-full="../../static/images/kittIRL.jpg" data-full-webp="../../static/images/kittIRL.webp" alt="Thumbnail 2" width="152" height="114" loading="lazy" decoding="async" class="">
     </div>
     
   </div>
@@ -122,7 +125,7 @@
   <aside>
     <div class="side-card">
       <h3><i class="fa fa-calendar"></i> Upcoming event</h3>
-      <img src="../../static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img">
+      <picture><source srcset="../../static/images/sunglassesAvatar.webp" type="image/webp"><img src="../../static/images/sunglassesAvatar.png" alt="Upcoming event" class="event-img" width="735" height="541"></picture>
       <div id="event-box">
         
           <div class="big">Halloween</div>
