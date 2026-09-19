@@ -15,7 +15,12 @@ site's database; `build.py` renders them into the deployable site in `docs/`.
 │   ├── films.json       films for the "Film of the Hour" quote box
 │   ├── quotes.json      one quote per film (the Wikiquote API the old site used
 │                        is dead, so quotes are baked in at build time)
-│   └── events.json      upcoming events (empty = "No Events Scheduled")
+│   └── events.json      upcoming events for the sidebar card. One-time events use
+│                        "scheduled": "YYYY-MM-DD HH:MM:SS"; recurring yearly
+│                        events use "recurring": "yearly" with "month"/"day".
+│                        The card is rendered client-side from these, so past
+│                        events disappear on their own — rebuild only to add
+│                        or change events.
 ├── assets/              third-party files vendored locally so the site has no
 │   ├── fonts/           CDN dependencies: Font Awesome fonts, Open Sans
 │   ├── js/              jQuery, Font Awesome 5, highlight.js

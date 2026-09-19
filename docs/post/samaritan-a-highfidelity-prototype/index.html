@@ -153,8 +153,8 @@
               
   <h6 class="w3-opacity">Quote From the Film of the Hour:</h6>
 
-  <p style="font-size:14px;" class="w3-border w3-padding" id="film-quote">So shines a good deed in a weary world.</p>
-  <span class="w3-right w3-opacity w3-bold" id="film-cite">— <b> <i>Willy Wonka & the Chocolate Factory</i>, 1971</b></span>
+  <p style="font-size:14px;" class="w3-border w3-padding" id="film-quote">The only winning move is not to play.</p>
+  <span class="w3-right w3-opacity w3-bold" id="film-cite">— <b> <i>WarGames</i>, 1983</b></span>
   <script src="../../static/js/film-quotes.js"></script>
   <script>
     // "Film of the Hour": one film per hour, same for every visitor.
@@ -208,9 +208,61 @@
           <div class="w3-container">
             <p style="padding-top: 10px;">Upcoming Event:</p>
             <img src="../../static/images/sunglassesAvatar.png" alt="Events" style="width:100%;">
+            <div id="event-box">
             
-              <p style="padding-top: 5px;"><strong>No Events Scheduled</strong></p>
+              <p style="padding-top: 10px;"><strong>Halloween</strong></p>
+              
+              <p style="line-height: 16px;">October 31, 2026</p>
+              
             
+            </div>
+            <script src="../../static/js/site-events.js"></script>
+            <script>
+              // Pick the next upcoming event at page-load time (one-time or
+              // yearly recurring) so past events expire on their own without
+              // needing a rebuild.
+              document.addEventListener("DOMContentLoaded", function () {
+                if (typeof SITE_EVENTS === "undefined") return;
+                function esc(s) {
+                  return String(s).replace(/[&<>"']/g, function (c) {
+                    return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c];
+                  });
+                }
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+                var best = null, bestDate = null;
+                SITE_EVENTS.forEach(function (e) {
+                  var d = null;
+                  if (e.recurring === "yearly" && e.month && e.day) {
+                    d = new Date(today.getFullYear(), e.month - 1, e.day);
+                    if (d < today) d = new Date(today.getFullYear() + 1, e.month - 1, e.day);
+                  } else if (e.scheduled) {
+                    d = new Date(e.scheduled.slice(0, 10) + "T00:00:00");
+                    if (d < today) return;
+                  } else {
+                    return;
+                  }
+                  if (!bestDate || d < bestDate) { bestDate = d; best = e; }
+                });
+                var box = document.getElementById("event-box");
+                if (!box) return;
+                if (!best) {
+                  box.innerHTML = '<p style="padding-top: 5px;"><strong>No Events Scheduled</strong></p>';
+                  return;
+                }
+                var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                var html = '<p style="padding-top: 10px;"><strong>' + esc(best.name) + '</strong></p>';
+                if (best.start) {
+                  html += '<p style="line-height: 16px;">' + esc(best.start) + '</p>';
+                  html += '<hr style="line-height: 16px; width:30px; margin: auto; padding-bottom: 10px;">';
+                }
+                html += '<p style="line-height: 16px;">' + months[bestDate.getMonth()] + ' ' + bestDate.getDate() + ', ' + bestDate.getFullYear() + '</p>';
+                if (best.info) {
+                  html += '<a target="_blank" href="' + esc(best.info) + '" class="w3-button w3-block w3-theme-l4" style="margin-bottom: -6px;" rel="noreferrer noopener">Info</a><br>';
+                }
+                box.innerHTML = html;
+              });
+            </script>
           </div>
         </div>
         <br>

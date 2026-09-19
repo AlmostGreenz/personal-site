@@ -13,7 +13,8 @@ import os
 import random
 import re
 import shutil
-from datetime import datetime
+import time
+from datetime import date, datetime
 
 from jinja2 import Environment, FileSystemLoader
 from markupsafe import Markup
@@ -96,19 +97,38 @@ def load(name):
 
 
 def get_event(events):
-    """Mirror application.py's get_event(): the next scheduled event whose
-    date hasn't passed yet, or None when there are no upcoming events."""
+    """Mirror application.py's get_event(): the next upcoming event, or None
+    when there are no upcoming events. Supports one-time events
+    (scheduled: 'YYYY-MM-DD HH:MM:SS') and yearly recurring events
+    (recurring: 'yearly', month, day). The returned dict carries a 'display'
+    date string for the template."""
     today = datetime.now().date()
-    upcoming = []
+    best = None
     for e in events:
-        try:
-            when = datetime.strptime(e["scheduled"][:19], "%Y-%m-%d %H:%M:%S").date()
-        except (KeyError, TypeError, ValueError):
+        when = None
+        if e.get("recurring") == "yearly" and e.get("month") and e.get("day"):
+            try:
+                when = date(today.year, e["month"], e["day"])
+            except ValueError:
+                continue
+            if when < today:
+                when = date(today.year + 1, e["month"], e["day"])
+        elif e.get("scheduled"):
+            try:
+                when = datetime.strptime(
+                    e["scheduled"][:19], "%Y-%m-%d %H:%M:%S"
+                ).date()
+            except (TypeError, ValueError):
+                continue
+            if when < today:
+                continue
+        if when is None:
             continue
-        if when >= today:
-            upcoming.append((when, e))
-    upcoming.sort(key=lambda t: t[0])
-    return upcoming[0][1] if upcoming else None
+        e = dict(e)
+        e["display"] = "%s %d, %d" % (when.strftime("%B"), when.day, when.year)
+        if best is None or when < best[0]:
+            best = (when, e)
+    return best[1] if best else None
 
 
 def process_post(raw):
@@ -145,10 +165,16 @@ def main():
     posts = [process_post(p) for p in load("posts")]
     films = load("films")
     quotes = load("quotes")
-    event = get_event(load("events"))
+    events = load("events")
+    event = get_event(events)
     posts_nav = [{"title": p["title"], "url": p["url"]} for p in posts]  # newest first
 
-    film = random.choice(films)
+    # No-JS fallback for the Film of the Hour: derive it from the current hour
+    # with the same hash the client-side script uses, so the fallback agrees
+    # with what JS visitors see instead of changing on every rebuild.
+    hour = int(time.time() // 3600)
+    quoted_films = [f for f in films if f["name"] in quotes]
+    film = quoted_films[(hour * 2654435761) % len(quoted_films)]
     quote = profanity.censor(quotes.get(film["name"], ""))
 
     if os.path.exists(OUT):
@@ -312,6 +338,10 @@ def main():
     ]
     with open(os.path.join(OUT, "static", "js", "film-quotes.js"), "w") as f:
         f.write("var FILM_QUOTES = " + json.dumps(film_quotes) + ";\n")
+    # Bake events for client-side rendering: the upcoming-event card picks the
+    # next event at page-load time so past events expire without a rebuild.
+    with open(os.path.join(OUT, "static", "js", "site-events.js"), "w") as f:
+        f.write("var SITE_EVENTS = " + json.dumps(events) + ";\n")
     css_path = os.path.join(OUT, "static", "styling", "css", "styles.pure.css")
     with open(css_path) as f:
         css = f.read()
