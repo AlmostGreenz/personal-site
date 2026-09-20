@@ -329,6 +329,8 @@ def main():
             "img_dims": img_dims,
             "thumb_dims": thumb_dims,
             "request": FakeRequest(path, SITE_URL + path),
+            "site_url": SITE_URL.rstrip("/"),
+            "page_url": SITE_URL.rstrip("/") + path,
         }
 
     def write(rel_path, html):
