@@ -290,7 +290,6 @@ def main():
 
     posts = [process_post(p) for p in load("posts")]
     films = load("films")
-    quotes = load("quotes")
     events = load("events")
     event = get_event(events)
     posts_nav = [{"title": p["title"], "url": p["url"]} for p in posts]  # newest first
@@ -302,7 +301,9 @@ def main():
     # Featured film quote: fixed, baked in at build time as the no-JS fallback.
     # Visitors with JS see the hourly "Film of the Hour" rotation instead.
     film = next((f for f in films if f["name"] == FEATURED_FILM_NAME), films[0])
-    quote = profanity.censor(quotes.get(film["name"], ""))
+    if not film.get("quotes"):
+        raise SystemExit("build failed: film %r has no quotes" % film["name"])
+    quote = profanity.censor(film["quotes"][0])
 
     # Intrinsic image dimensions + thumbnail sizes for the templates, so
     # every <img> ships width/height (no layout shift) and the gallery
@@ -414,10 +415,12 @@ def main():
     # Bake every film+quote into a JS file so the "Film of the Hour" rotates
     # hourly client-side (the old Wikiquote API is dead, and the static
     # pages can't rotate it at serve time).
+    for f in films:
+        if not f.get("quotes"):
+            raise SystemExit("build failed: film %r has no quotes" % f["name"])
     film_quotes = [
-        {"name": f["name"], "year": f["year"], "quote": quotes[f["name"]]}
+        {"name": f["name"], "year": f["year"], "quotes": f["quotes"]}
         for f in films
-        if f["name"] in quotes
     ]
     with open(os.path.join(OUT, "static", "js", "film-quotes.js"), "w") as f:
         f.write("var FILM_QUOTES = " + json.dumps(film_quotes) + ";\n")

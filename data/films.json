@@ -1,62 +1,107 @@
 [
   {
     "name": "Back to the Future Part II",
-    "year": 1989
+    "year": 1989,
+    "quotes": [
+      "Maybe we'll bump into each other sometime again in the future. Or in the past."
+    ]
   },
   {
     "name": "Ghostbusters",
-    "year": 1984
+    "year": 1984,
+    "quotes": [
+      "Back off, man. I'm a scientist!"
+    ]
   },
   {
     "name": "Inception",
-    "year": 2010
+    "year": 2010,
+    "quotes": [
+      "You mustn't be afraid to dream a little bigger."
+    ]
   },
   {
     "name": "Willy Wonka & the Chocolate Factory",
-    "year": 1971
+    "year": 1971,
+    "quotes": [
+      "So shines a good deed in a weary world."
+    ]
   },
   {
     "name": "Ferris Bueller's Day Off",
-    "year": 1986
+    "year": 1986,
+    "quotes": [
+      "Life moves pretty fast. If you don't stop and look around once in a while, you could miss it."
+    ]
   },
   {
     "name": "Avengers: Endgame",
-    "year": 2019
+    "year": 2019,
+    "quotes": [
+      "Part of the journey is the end."
+    ]
   },
   {
     "name": "Harry Potter and the Philosopher's Stone",
-    "year": 2001
+    "year": 2001,
+    "quotes": [
+      "It does not do to dwell on dreams and forget to live."
+    ]
   },
   {
     "name": "WarGames",
-    "year": 1983
+    "year": 1983,
+    "quotes": [
+      "The only winning move is not to play."
+    ]
   },
   {
     "name": "The Martian",
-    "year": 2015
+    "year": 2015,
+    "quotes": [
+      "I'm going to have to science the heck out of this."
+    ]
   },
   {
     "name": "Back to the Future",
-    "year": 1985
+    "year": 1985,
+    "quotes": [
+      "Roads? Where we're going, we don't need roads."
+    ]
   },
   {
     "name": "Thor: Ragnarok",
-    "year": 2017
+    "year": 2017,
+    "quotes": [
+      "He's a friend from work!"
+    ]
   },
   {
     "name": "Back to the Future Part III",
-    "year": 1990
+    "year": 1990,
+    "quotes": [
+      "Your future hasn't been written yet. No one's has."
+    ]
   },
   {
     "name": "Avengers: Infinity War",
-    "year": 2018
+    "year": 2018,
+    "quotes": [
+      "Dread it. Run from it. Destiny arrives all the same."
+    ]
   },
   {
     "name": "Blade Runner",
-    "year": 1982
+    "year": 1982,
+    "quotes": [
+      "All those moments will be lost in time, like tears in rain."
+    ]
   },
   {
     "name": "The Karate Kid Part II",
-    "year": 1986
+    "year": 1986,
+    "quotes": [
+      "Never put passion before principle. Even if win, you lose."
+    ]
   }
 ]

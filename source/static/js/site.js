@@ -29,7 +29,8 @@
     if (q && cite && typeof FILM_QUOTES !== "undefined" && FILM_QUOTES.length) {
       var hour = Math.floor(Date.now() / 3600000);
       var pick = FILM_QUOTES[(hour * 2654435761) % FILM_QUOTES.length];
-      q.textContent = "\u201C" + pick.quote + "\u201D";
+      var quote = pick.quotes[Math.floor(Math.random() * pick.quotes.length)];
+      q.textContent = "\u201C" + quote + "\u201D";
       cite.innerHTML =
         "\u2014 <em>" + pick.name + "</em>, " + pick.year + " \u00B7 rotates every hour";
     }

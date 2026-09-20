@@ -19,9 +19,11 @@ localhost, and any repo path).
 ├── robots.txt           served as-is (copied to docs/robots.txt)
 ├── data/                the content — the site's "database" as JSON
 │   ├── posts.json       blog posts (title, url, tags, posted date, content, images…)
-│   ├── films.json       films for the "Film of the Hour" quote box
-│   ├── quotes.json      one quote per film (the Wikiquote API the old site used
-│                        is dead, so quotes are baked in at build time)
+│   ├── films.json       films for the "Film of the Hour" quote box — each film
+│   │                   has a "quotes" list (a film can carry more than one
+│   │                   quote; when it's that film's hour, one is picked at
+│   │                   random). The old Wikiquote API the site once used is
+│   │                   dead, so quotes are baked in at build time.
 │   └── events.json      upcoming events for the sidebar card. One-time events use
 │                        "scheduled": "YYYY-MM-DD HH:MM:SS"; recurring yearly
 │                        events use "recurring": "yearly" with "month"/"day".
